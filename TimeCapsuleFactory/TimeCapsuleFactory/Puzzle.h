@@ -12,13 +12,16 @@
 #include <integer.h>
 #include <functional>
 #include <vector>
+#include <cmath>
 
 using std::chrono::nanoseconds;
 using CryptoPP::SecByteBlock;
 using CryptoPP::Integer;
 using std::vector;
 using std::function;
+using std::chrono::high_resolution_clock;
 typedef function<unsigned long long (unsigned long long)> ComplexityFunc;
+typedef vector<std::pair<unsigned long long, nanoseconds>> DurationSamples;
 
 class Puzzle
 {
@@ -35,7 +38,7 @@ public:
 	vector<ComplexityFunc> getPossibleComplexities() { return possibleComplexities; }
 	unsigned long getBase() { return base; }
 
-	virtual nanoseconds funcdur(unsigned long long times);
+	virtual DurationSamples funcdur(size_t maxStepToTest, nanoseconds maxStepTimeToTest);
 	virtual SecByteBlock setup(const SecByteBlock& key, unsigned long long times, unsigned long& base, Integer& n);
 	virtual SecByteBlock solve(const SecByteBlock& ckey, unsigned long long times, unsigned long base, const Integer& n);
 };

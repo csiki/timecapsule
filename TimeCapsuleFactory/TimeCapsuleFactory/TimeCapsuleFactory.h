@@ -33,10 +33,10 @@ public:
 			throw std::logic_error("Different size of byte and DataType! DataType is not convertible to byte!");
 
 		// determine operation time of a single step in solving the puzzle
-		double var;
+		double stdev;
 		HardwareSpeedTester hst;
-		auto opcomp = hst.testPuzzleComplexity(puzzle, var);
-		Logger::log("Best complexity function is fitted with variance: " + std::to_string(var));
+		auto opcomp = hst.testPuzzleComplexity(puzzle, stdev);
+		Logger::log("Best complexity function is fitted with standard deviation: " + std::to_string(stdev));
 
 		// determine number of steps needed to spend the given duration
 		auto times = hst.estimateStepsNeeded(opcomp, duration);

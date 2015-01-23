@@ -51,7 +51,7 @@
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">8</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">40</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">739</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">719</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">85</XPD:ATTR>
 <XPD:REF name="Model">P4fMBigOhEq1K35TSEBk3AAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="1b/UPt6y+ka3sT7bH6Qd3wAA">
@@ -110,8 +110,8 @@
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">812</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">60</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">608</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">82</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">833</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">95</XPD:ATTR>
 <XPD:REF name="Model">2i04dp7lvkikkyN4pK2NIQAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="sI6R6JXHSkSXkVRZDcM57gAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="h/4tNH6geUiSlW2K1IIcowAA">
@@ -149,14 +149,14 @@
 <XPD:OBJ name="OwnedViews[4]" type="UMLNoteLinkView" guid="G7dfiv4q3ketw3dgs4ud3AAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">780,37;746,41</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">780,37;726,43</XPD:ATTR>
 <XPD:REF name="Head">tblB05XW1EqcfaGgOnXmeQAA</XPD:REF>
 <XPD:REF name="Tail">aHK/O8ZbVUaXRDNe/uO+tgAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[5]" type="UMLDependencyView" guid="vQwuRLLbXEeFL9JuzCvzkwAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">357,124;283,280</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">349,124;281,280</XPD:ATTR>
 <XPD:REF name="Model">zYWr64tqmEarb7ggLqqPcgAA</XPD:REF>
 <XPD:REF name="Head">tUAusWj7fkKQSMJ+i+52GAAA</XPD:REF>
 <XPD:REF name="Tail">tblB05XW1EqcfaGgOnXmeQAA</XPD:REF>
@@ -182,7 +182,7 @@
 <XPD:OBJ name="OwnedViews[6]" type="UMLDependencyView" guid="0t9lGDIRlku2nRExYUbUCwAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">746,91;812,93</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">726,92;812,95</XPD:ATTR>
 <XPD:REF name="Model">fEMBGKhKNE+BMEw30Ls/iAAA</XPD:REF>
 <XPD:REF name="Head">x+CtFOFh40ezkGkLcsX72gAA</XPD:REF>
 <XPD:REF name="Tail">tblB05XW1EqcfaGgOnXmeQAA</XPD:REF>
@@ -208,8 +208,8 @@
 <XPD:OBJ name="OwnedViews[7]" type="UMLClassView" guid="kcwqwsvt1kSdx3w7UKIexgAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Left" type="integer">620</XPD:ATTR>
-<XPD:ATTR name="Top" type="integer">152</XPD:ATTR>
+<XPD:ATTR name="Left" type="integer">616</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">188</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">547</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">147</XPD:ATTR>
 <XPD:REF name="Model">lqJ0yYPPTUKigDCaY/NSywAA</XPD:REF>
@@ -239,7 +239,7 @@
 <XPD:OBJ name="OwnedViews[8]" type="UMLDependencyView" guid="44HbCYJsoUOXHW/fLYSKRwAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">529,124;630,152</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">489,124;676,188</XPD:ATTR>
 <XPD:REF name="Model">ulxLtJKR/U691+GPNvmkXAAA</XPD:REF>
 <XPD:REF name="Head">kcwqwsvt1kSdx3w7UKIexgAA</XPD:REF>
 <XPD:REF name="Tail">tblB05XW1EqcfaGgOnXmeQAA</XPD:REF>
@@ -276,14 +276,14 @@ http://en.cppreference.com/w/cpp/chrono/duration
 <XPD:OBJ name="OwnedViews[10]" type="UMLNoteLinkView" guid="hzC0LbhLL0qAGLN+APfCmQAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">1173,60;1189,49</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">1221,60;1220,49</XPD:ATTR>
 <XPD:REF name="Head">rOs1Gj7JckGQorKYlc5wIQAA</XPD:REF>
 <XPD:REF name="Tail">x+CtFOFh40ezkGkLcsX72gAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[11]" type="UMLDependencyView" guid="9lOWf1B4B0Ce1Lr0L9g64wAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">1042,141;1022,152</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">1125,154;1050,188</XPD:ATTR>
 <XPD:REF name="Model">eGe596dWdkiZ+1zYf14mPwAA</XPD:REF>
 <XPD:REF name="Head">kcwqwsvt1kSdx3w7UKIexgAA</XPD:REF>
 <XPD:REF name="Tail">x+CtFOFh40ezkGkLcsX72gAA</XPD:REF>
@@ -340,7 +340,7 @@ http://en.cppreference.com/w/cpp/chrono/duration
 <XPD:OBJ name="OwnedViews[13]" type="UMLDependencyView" guid="KqL+Nv53J06bYTS3kg7n8gAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">262,124;134,171</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">256,124;134,170</XPD:ATTR>
 <XPD:REF name="Model">Ec0rvV7dVEaUhELP7jQjVAAA</XPD:REF>
 <XPD:REF name="Head">NLNV1x6QTEe9EWtZ12DzaAAA</XPD:REF>
 <XPD:REF name="Tail">tblB05XW1EqcfaGgOnXmeQAA</XPD:REF>
@@ -367,7 +367,7 @@ http://en.cppreference.com/w/cpp/chrono/duration
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">536</XPD:ATTR>
-<XPD:ATTR name="Top" type="integer">308</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">352</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">247</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">241</XPD:ATTR>
 <XPD:REF name="Model">6/4C1kgq8kyC3Jw1g8beyAAA</XPD:REF>
@@ -396,7 +396,7 @@ http://en.cppreference.com/w/cpp/chrono/duration
 <XPD:OBJ name="OwnedViews[15]" type="UMLDependencyView" guid="vGxcvqQYb02eN4VF8h6VTwAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">411,124;561,308</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">398,124;569,352</XPD:ATTR>
 <XPD:REF name="Model">iFuPrlszK0ufBBh2iAaqMgAA</XPD:REF>
 <XPD:REF name="Head">VBmNGIzDCki4M23aCu6d5QAA</XPD:REF>
 <XPD:REF name="Tail">tblB05XW1EqcfaGgOnXmeQAA</XPD:REF>
@@ -422,8 +422,8 @@ http://en.cppreference.com/w/cpp/chrono/duration
 <XPD:OBJ name="OwnedViews[16]" type="UMLClassView" guid="76yCSjfExkqstzLGDvdlnAAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Left" type="integer">884</XPD:ATTR>
-<XPD:ATTR name="Top" type="integer">332</XPD:ATTR>
+<XPD:ATTR name="Left" type="integer">952</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">380</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">115</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">43</XPD:ATTR>
 <XPD:REF name="Model">8ou4W0hUFkW5xXDwcnhIjQAA</XPD:REF>
@@ -453,7 +453,7 @@ http://en.cppreference.com/w/cpp/chrono/duration
 <XPD:OBJ name="OwnedViews[17]" type="UMLGeneralizationView" guid="4ZTBUvxujkC9VVb+PY+w8AAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">933,332;920,298</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">991,380;952,334</XPD:ATTR>
 <XPD:REF name="Model">4BI32iHbvE2T1PTr/eLzWQAA</XPD:REF>
 <XPD:REF name="Head">kcwqwsvt1kSdx3w7UKIexgAA</XPD:REF>
 <XPD:REF name="Tail">76yCSjfExkqstzLGDvdlnAAA</XPD:REF>
@@ -528,29 +528,29 @@ http://en.cppreference.com/w/cpp/chrono/duration
 <XPD:ATTR name="Name" type="string">createTimeCapsule</XPD:ATTR>
 <XPD:REF name="Owner">P4fMBigOhEq1K35TSEBk3AAA</XPD:REF>
 <XPD:ATTR name="#Parameters" type="integer">5</XPD:ATTR>
-<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="mBD/wUEkSEaI9HecgPHS7AAA">
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="g4IJohdL70KZh7jDdweRzAAA">
 <XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">Capsule&lt;DataType&gt;</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">SAJqAPQ1l0u3R1lIik/1eAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="AgqMj5b45ka6MIAxbpGwEQAA">
+<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="jhRrRUrcYUyt36ABuGf60AAA">
 <XPD:ATTR name="Name" type="string">puzzle</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">Puzzle&amp;</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">SAJqAPQ1l0u3R1lIik/1eAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="i2GF6pMizEOegrhulkt+4gAA">
+<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="QzGIIbal6UGR9oIs6Xw4hgAA">
 <XPD:ATTR name="Name" type="string">data</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">vector&lt;DataType&gt;</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">SAJqAPQ1l0u3R1lIik/1eAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[3]" type="UMLParameter" guid="uDrBzGuWP0az5f7qmx4k/AAA">
+<XPD:OBJ name="Parameters[3]" type="UMLParameter" guid="lP5OssHs1U204vLKIsfzPwAA">
 <XPD:ATTR name="Name" type="string">duration</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">chrono_seconds</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">SAJqAPQ1l0u3R1lIik/1eAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[4]" type="UMLParameter" guid="pIya2Qq050KMcLzRLOCXJQAA">
-<XPD:ATTR name="Name" type="string">opcomp</XPD:ATTR>
-<XPD:ATTR name="TypeExpression" type="string">ComplexityFunc</XPD:ATTR>
+<XPD:OBJ name="Parameters[4]" type="UMLParameter" guid="ON86Dh2+K0eQSCzx11pyTAAA">
+<XPD:ATTR name="Name" type="string">times</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">unsigned long long</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">SAJqAPQ1l0u3R1lIik/1eAAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
@@ -634,59 +634,110 @@ http://en.cppreference.com/w/cpp/chrono/duration
 <XPD:REF name="ClientDependencies[0]">eGe596dWdkiZ+1zYf14mPwAA</XPD:REF>
 <XPD:ATTR name="#SupplierDependencies" type="integer">1</XPD:ATTR>
 <XPD:REF name="SupplierDependencies[0]">fEMBGKhKNE+BMEw30Ls/iAAA</XPD:REF>
-<XPD:ATTR name="#Operations" type="integer">3</XPD:ATTR>
+<XPD:ATTR name="#Operations" type="integer">4</XPD:ATTR>
 <XPD:OBJ name="Operations[0]" type="UMLOperation" guid="WwYWo68t6Eu2tChICGIpKAAA">
 <XPD:ATTR name="Name" type="string">fitComplexity</XPD:ATTR>
 <XPD:ATTR name="Visibility" type="UMLVisibilityKind">vkPrivate</XPD:ATTR>
 <XPD:REF name="Owner">2i04dp7lvkikkyN4pK2NIQAA</XPD:REF>
 <XPD:ATTR name="#Parameters" type="integer">4</XPD:ATTR>
-<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="q/L7TJNu4kKqEBhmnQNQ0gAA">
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="EG70xOs7K0Ce2n3iJNcLRwAA">
 <XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">ComplexityFunc</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">WwYWo68t6Eu2tChICGIpKAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="KQtouIdniE6BDcEhKXzFfgAA">
-<XPD:ATTR name="Name" type="string">puzzle</XPD:ATTR>
-<XPD:ATTR name="TypeExpression" type="string">Puzzle&amp;</XPD:ATTR>
+<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="LCY8faAFR0yl0PfEuuU0zwAA">
+<XPD:ATTR name="Name" type="string">samples</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">const DurationSamples&amp;</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">WwYWo68t6Eu2tChICGIpKAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="ieQhSFkbpUiZgDIAIaOLEQAA">
+<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="7Aairuybck+BADkM7q8dXwAA">
 <XPD:ATTR name="Name" type="string">complexity</XPD:ATTR>
-<XPD:ATTR name="TypeExpression" type="string">ComplexityFun</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">const ComplexityFun&amp;</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">WwYWo68t6Eu2tChICGIpKAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[3]" type="UMLParameter" guid="YWCyc6l8DECTR03h+s06cwAA">
+<XPD:OBJ name="Parameters[3]" type="UMLParameter" guid="ccWk5ZaYDke0zZU4OqgnjgAA">
 <XPD:ATTR name="Name" type="string">var</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">double&amp;</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">WwYWo68t6Eu2tChICGIpKAAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="Operations[1]" type="UMLOperation" guid="ZWuRpolUBk+fsqnT55jZTwAA">
+<XPD:OBJ name="Operations[1]" type="UMLOperation" guid="YWz2RcfvrkOkLZ7bJaVwmAAA">
+<XPD:ATTR name="Name" type="string">cramerEquationSolver</XPD:ATTR>
+<XPD:ATTR name="Visibility" type="UMLVisibilityKind">vkPrivate</XPD:ATTR>
+<XPD:REF name="Owner">2i04dp7lvkikkyN4pK2NIQAA</XPD:REF>
+<XPD:ATTR name="#Parameters" type="integer">9</XPD:ATTR>
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="vxI24ILlzEyYtQYai90hbQAA">
+<XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">bool</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">YWz2RcfvrkOkLZ7bJaVwmAAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="wmOgtBqnAkOrsC6BWcKPcgAA">
+<XPD:ATTR name="Name" type="string">a11</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">long double</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">YWz2RcfvrkOkLZ7bJaVwmAAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="pOsyaLvel0uDQZ4ZgqAIQwAA">
+<XPD:ATTR name="Name" type="string">a12</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">long double</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">YWz2RcfvrkOkLZ7bJaVwmAAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Parameters[3]" type="UMLParameter" guid="9/hjm7nlP0mpc5T4PPC12AAA">
+<XPD:ATTR name="Name" type="string">a21</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">long double</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">YWz2RcfvrkOkLZ7bJaVwmAAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Parameters[4]" type="UMLParameter" guid="EONdJBQ8/0mAsSKn0hsMaAAA">
+<XPD:ATTR name="Name" type="string">a22</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">long double</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">YWz2RcfvrkOkLZ7bJaVwmAAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Parameters[5]" type="UMLParameter" guid="QuWnZD0MTkSWJ5DsJfi18QAA">
+<XPD:ATTR name="Name" type="string">y1</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">long double</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">YWz2RcfvrkOkLZ7bJaVwmAAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Parameters[6]" type="UMLParameter" guid="tVB5Vw5SKUWucbPRLiCioQAA">
+<XPD:ATTR name="Name" type="string">y2</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">long double</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">YWz2RcfvrkOkLZ7bJaVwmAAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Parameters[7]" type="UMLParameter" guid="+NWDTsu5ZEG+IGo7h+MLFAAA">
+<XPD:ATTR name="Name" type="string">x1</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">long double&amp;</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">YWz2RcfvrkOkLZ7bJaVwmAAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Parameters[8]" type="UMLParameter" guid="iYdQS2+jJUWPiNma7B4K8wAA">
+<XPD:ATTR name="Name" type="string">x2</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">long double&amp;</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">YWz2RcfvrkOkLZ7bJaVwmAAA</XPD:REF>
+</XPD:OBJ>
+</XPD:OBJ>
+<XPD:OBJ name="Operations[2]" type="UMLOperation" guid="ZWuRpolUBk+fsqnT55jZTwAA">
 <XPD:ATTR name="Name" type="string">testPuzzleOpSpeed</XPD:ATTR>
 <XPD:REF name="Owner">2i04dp7lvkikkyN4pK2NIQAA</XPD:REF>
 <XPD:ATTR name="#Parameters" type="integer">4</XPD:ATTR>
-<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="A/mA56QGF0CbqUpTrFAr9gAA">
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="PqdISyWbukWDEde64wE+xAAA">
 <XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">chrono_nanoseconds</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">ZWuRpolUBk+fsqnT55jZTwAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="AYMP9vdG8kWkF3fKRa+20gAA">
+<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="5jOcydkEqk2Crwkk+gSZQQAA">
 <XPD:ATTR name="Name" type="string">puzzle</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">Puzzle&amp;</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">ZWuRpolUBk+fsqnT55jZTwAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="i57/f0Kf+0mOMOHhBER2ZgAA">
+<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="4x76bUvPjEiNd8mKxvG3hwAA">
 <XPD:ATTR name="Name" type="string">maxStepToTest</XPD:ATTR>
-<XPD:ATTR name="TypeExpression" type="string">unsigned</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">size_t</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">ZWuRpolUBk+fsqnT55jZTwAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[3]" type="UMLParameter" guid="SzY2e6VufkOHxvlb5cRWFwAA">
+<XPD:OBJ name="Parameters[3]" type="UMLParameter" guid="FeeuGTEHHUCbNMx81UZzVAAA">
 <XPD:ATTR name="Name" type="string">maxStepTimeToTest</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">nanoseconds</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">ZWuRpolUBk+fsqnT55jZTwAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="Operations[2]" type="UMLOperation" guid="tzcO0siEJUySGK3LHL2egwAA">
+<XPD:OBJ name="Operations[3]" type="UMLOperation" guid="tzcO0siEJUySGK3LHL2egwAA">
 <XPD:ATTR name="Name" type="string">estimateStepsNeeded</XPD:ATTR>
 <XPD:REF name="Owner">2i04dp7lvkikkyN4pK2NIQAA</XPD:REF>
 <XPD:ATTR name="#Parameters" type="integer">3</XPD:ATTR>
@@ -749,15 +800,20 @@ http://en.cppreference.com/w/cpp/chrono/duration
 <XPD:OBJ name="Operations[1]" type="UMLOperation" guid="/4M46hTLZ0uRbtYMBQqrcwAA">
 <XPD:ATTR name="Name" type="string">funcdur</XPD:ATTR>
 <XPD:REF name="Owner">lqJ0yYPPTUKigDCaY/NSywAA</XPD:REF>
-<XPD:ATTR name="#Parameters" type="integer">2</XPD:ATTR>
-<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="s3/JbzX0SkuJdSFXEfVGTAAA">
+<XPD:ATTR name="#Parameters" type="integer">3</XPD:ATTR>
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="/+4v4Nw7BUy/MbAWraoSTAAA">
 <XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
-<XPD:ATTR name="TypeExpression" type="string">chrono_nanoseconds</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">DurationSamples</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">/4M46hTLZ0uRbtYMBQqrcwAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="tLd3HLSuI02WfuZq67atogAA">
-<XPD:ATTR name="Name" type="string">times</XPD:ATTR>
-<XPD:ATTR name="TypeExpression" type="string">unsigned long long</XPD:ATTR>
+<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="y3ZEjAWbbEmoJj38h0prlQAA">
+<XPD:ATTR name="Name" type="string">maxStepToTest</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">size_t</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">/4M46hTLZ0uRbtYMBQqrcwAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="qLLL74B8S0Odgknp3jAcFgAA">
+<XPD:ATTR name="Name" type="string">maxStepTimeToTest</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">chrono_nanoseconds</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">/4M46hTLZ0uRbtYMBQqrcwAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
@@ -846,7 +902,7 @@ http://en.cppreference.com/w/cpp/chrono/duration
 <XPD:OBJ name="Attributes[1]" type="UMLAttribute" guid="t4BEw8hu+0GYogosMygDpQAA">
 <XPD:ATTR name="Name" type="string">possibleComplexities</XPD:ATTR>
 <XPD:ATTR name="Visibility" type="UMLVisibilityKind">vkProtected</XPD:ATTR>
-<XPD:ATTR name="TypeExpression" type="string">vector&lt;ComplexxityFunc&gt;</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">vector&lt;ComplexityFunc&gt;</XPD:ATTR>
 <XPD:REF name="Owner">lqJ0yYPPTUKigDCaY/NSywAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>

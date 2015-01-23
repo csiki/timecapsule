@@ -32,7 +32,6 @@ using CryptoPP::Integer;
 int main(int argc, char* argv[])
 {
 
-
 	//char arr[] = {'H', 'E', 'L', 'L', 'O', '!'};
 	//TimeCapsuleFactory<> factory;
 	//Puzzle puzzle;

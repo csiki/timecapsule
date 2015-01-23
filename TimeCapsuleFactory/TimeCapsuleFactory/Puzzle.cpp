@@ -8,12 +8,44 @@
 
 void Puzzle::initComplexities()
 {
-
+	ComplexityFunc fnlog = [] (unsigned long long n) {
+		return n * std::log(n) + .5;
+	};
+	ComplexityFunc fn2 = [] (unsigned long long n) {
+		return n * n;
+	};
+	ComplexityFunc fexp = [] (unsigned long long n) {
+		return std::exp(n) + .5;
+	};
+	ComplexityFunc f2exp = [] (unsigned long long n) {
+		return std::pow(2, n) + .5;
+	};
+	possibleComplexities.resize(4);
+	possibleComplexities.push_back(fnlog);
+	possibleComplexities.push_back(fn2);
+	possibleComplexities.push_back(fexp);
+	possibleComplexities.push_back(f2exp);
 }
 
-nanoseconds Puzzle::funcdur(unsigned long long times)
+DurationSamples Puzzle::funcdur(size_t maxStepToTest, nanoseconds maxStepTimeToTest)
 {
-	return nanoseconds();
+	// sample till maxStepTimeToTest or maxStepToTest is reached
+	unsigned long long i = 0;
+	nanoseconds steptime(0);
+	Integer num = base;
+	DurationSamples samples(maxStepToTest);
+	while (i < maxStepToTest && steptime < maxStepTimeToTest)
+	{
+		auto start = high_resolution_clock::now();
+		num *= num; // squaring
+		auto end = high_resolution_clock::now();
+		
+		steptime = end - start;
+		samples.push_back(std::make_pair(i, steptime));
+		++i;
+	}
+
+	return samples;
 }
 
 SecByteBlock Puzzle::setup(const SecByteBlock& key, unsigned long long times, unsigned long& base, Integer& n)

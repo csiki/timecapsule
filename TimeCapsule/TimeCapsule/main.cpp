@@ -7,10 +7,23 @@
 #include <secblock.h>
 
 using CryptoPP::Integer;
+using namespace std::chrono;
 
 int main(int argc, char* argv[])
 {
-	std::srand(std::time(0));
+	hours till(24*365*200);
+	nanoseconds acc(0);
+
+	std::cout << duration_cast<nanoseconds>(till).count() << std::endl << std::endl;
+
+	for (int i = 0; acc < till; ++i)
+	{
+		acc = duration_cast<nanoseconds>(acc + nanoseconds(99999999999999999));
+		std::cout << acc.count() << std::endl;
+	}
+	std::cout << acc.count();
+	
+	/*std::srand(std::time(0));
 
 	unsigned long long a = 3;
 	unsigned long long b = 3;
@@ -46,7 +59,7 @@ int main(int argc, char* argv[])
 		auto insec = std::chrono::duration_cast<std::chrono::milliseconds>(end2 - start2);
 
 		std::cout << i << ": " << insec.count() << std::endl;
-	}
+	}*/
 	//auto end2 = std::chrono::high_resolution_clock::now();
 	
 	//std::cout << "a: " << a << std::endl;

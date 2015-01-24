@@ -14,6 +14,7 @@
 #include <cmath>
 #include <limits>
 #include <numeric>
+#include <exception>
 #include "Puzzle.h"
 
 using std::chrono::nanoseconds;
@@ -31,7 +32,7 @@ private:
 
 public:
 	ComplexityFunc testPuzzleComplexity(Puzzle& puzzle, double& stdev, size_t maxStepToTest = 1000, nanoseconds maxStepTimeToTest = seconds(30));
-	unsigned long long estimateStepsNeeded(ComplexityFunc complexity, seconds duration);
+	unsigned long long estimateStepsNeeded(const ComplexityFunc& complexity, seconds duration, seconds& err);
 };
 
 #endif  //_HARDWARESPEEDTESTER_H

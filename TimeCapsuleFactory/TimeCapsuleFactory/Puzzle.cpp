@@ -48,23 +48,69 @@ DurationSamples Puzzle::funcdur(size_t maxStepToTest, nanoseconds maxStepTimeToT
 	return samples;
 }
 
-SecByteBlock Puzzle::setup(const SecByteBlock& key, unsigned long long times, unsigned long& base, Integer& n)
+// according to http://www.hashcash.org/papers/time-lock.pdf
+Integer Puzzle::setup(const SecByteBlock& key, unsigned long long times, unsigned long& base, Integer& n)
 {
-	return SecByteBlock(nullptr, 0);
+	// rand delta (1 or -1)
+	std::random_device drd;
+	std::mt19937 gen(drd());
+	std::uniform_int_distribution<> yndis(0, 1);
+	auto delta = yndis(gen);
+	delta = (delta == 0) ? -1 : 1;
+
+	// generate primes
+	AutoSeededRandomPool rnd;
+	PrimeAndGenerator pgen(delta, rnd, 1024, 1024);
+	auto p = pgen.Prime();
+	auto q = pgen.SubPrime();
+
+	// generate composite modulus & fi(n)
+	n = p * q;
+	auto fin = (p - 1) * (q - 1);
+	
+	// pick base
+	std::uniform_int_distribution<unsigned long> basedis(2, 10);
+	base = basedis(gen);
+
+	// encrypt key
+	auto e = Integer::Power2(times) % fin;
+	auto b = CryptoPP::ModularExponentiation(Integer(base), e, n);
+	auto ckey = cryptoSBB2Int(key) + b; // TODO + is append
+
+	return ckey; // return key as integer so no further Integer-SecByteBlock conversion is needed here, neither at solve
 }
 
-SecByteBlock Puzzle::solve(const SecByteBlock& ckey, unsigned long long times, unsigned long base, const Integer& n)
+// should be optimal as possible
+SecByteBlock Puzzle::solve(const Integer& ckey, unsigned long long times, unsigned long base, const Integer& n)
 {
-	return SecByteBlock(nullptr, 0);
+	Integer num(base);
+	--times; // one less as ModularExponentiation is used instead at the end
+	while (times--) num *= num;
+	num = CryptoPP::ModularExponentiation(num, num, n);
+
+	return cryptoInt2SBB(ckey - num); // TODO check if the same key is converted back
 }
 
 SecByteBlock cryptoInt2SBB(const Integer& integer)
 {
-	byte* bytearr = new byte[integer.ByteCount()];
-	for (unsigned int i = 0; i < integer.ByteCount(); ++i)
+
+	// TODO IMPLEMENT THIS SHIT integer.cpp:3086
+	/*for (size_t i=inputLen; i > 0; i--)
 	{
-		bytearr[i] = integer.GetByte(i);
+		bt.Get(b);
+		reg[(i-1)/WORD_SIZE] |= word(b) << ((i-1)%WORD_SIZE)*8;
+	}*/
+
+	byte* bytearr = new byte[integer.ByteCount()];
+	for (int i = integer.ByteCount() - 1; i >= 0; --i)
+	{
+		bytearr[i] = integer.GetByte(integer.ByteCount() - 1 - i);
 	}
 	SecByteBlock sbb(bytearr, integer.ByteCount());
 	return sbb;
+}
+
+inline Integer cryptoSBB2Int(const SecByteBlock& sbb)
+{
+	return Integer(sbb.data(), sbb.size(), CryptoPP::Integer::UNSIGNED);
 }

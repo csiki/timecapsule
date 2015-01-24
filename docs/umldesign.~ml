@@ -80,7 +80,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">280</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">527</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">491</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">85</XPD:ATTR>
 <XPD:REF name="Model">jzbVSi7QNUGsNXEIlcfpLwAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="L8YiLUqC7k2gkl6p51lV1gAA">
@@ -156,7 +156,7 @@
 <XPD:OBJ name="OwnedViews[5]" type="UMLDependencyView" guid="vQwuRLLbXEeFL9JuzCvzkwAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">349,124;281,280</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">346,124;266,280</XPD:ATTR>
 <XPD:REF name="Model">zYWr64tqmEarb7ggLqqPcgAA</XPD:REF>
 <XPD:REF name="Head">tUAusWj7fkKQSMJ+i+52GAAA</XPD:REF>
 <XPD:REF name="Tail">tblB05XW1EqcfaGgOnXmeQAA</XPD:REF>
@@ -600,22 +600,22 @@ http://en.cppreference.com/w/cpp/chrono/duration
 <XPD:ATTR name="Name" type="string">decrypt</XPD:ATTR>
 <XPD:REF name="Owner">jzbVSi7QNUGsNXEIlcfpLwAA</XPD:REF>
 <XPD:ATTR name="#Parameters" type="integer">4</XPD:ATTR>
-<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="UNsLu1Y680yTP19ydiHZhAAA">
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="iKssGAe7yEWWG20oXxFGWAAA">
 <XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">vector&lt;T&gt;</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">TsbR3CFom0qvMObN5QP19wAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="MQ1gNJY2PUedww/N6hnjRAAA">
+<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="bwOyj4nXQUSTrWHUEzGakgAA">
 <XPD:ATTR name="Name" type="string">cdata</XPD:ATTR>
-<XPD:ATTR name="TypeExpression" type="string">const vector&lt;T&gt;&amp;</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">vector&lt;T&gt;</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">TsbR3CFom0qvMObN5QP19wAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="NXUSVboNeEqUgE8MRU00NgAA">
+<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="PPzGmuNOBUms2rrjBpwTCwAA">
 <XPD:ATTR name="Name" type="string">key</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">const SecByteBlock&amp;</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">TsbR3CFom0qvMObN5QP19wAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[3]" type="UMLParameter" guid="OYomQZtReEKYeXDj8j59FgAA">
+<XPD:OBJ name="Parameters[3]" type="UMLParameter" guid="JiBa+Dv5LU6m/Hr8JzI8nQAA">
 <XPD:ATTR name="Name" type="string">iv</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">const SecByteBlock&amp;</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">TsbR3CFom0qvMObN5QP19wAA</XPD:REF>
@@ -640,23 +640,23 @@ http://en.cppreference.com/w/cpp/chrono/duration
 <XPD:ATTR name="Visibility" type="UMLVisibilityKind">vkPrivate</XPD:ATTR>
 <XPD:REF name="Owner">2i04dp7lvkikkyN4pK2NIQAA</XPD:REF>
 <XPD:ATTR name="#Parameters" type="integer">4</XPD:ATTR>
-<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="EG70xOs7K0Ce2n3iJNcLRwAA">
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="hJmHyvqPaE6iSEZkgyY+XgAA">
 <XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">ComplexityFunc</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">WwYWo68t6Eu2tChICGIpKAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="LCY8faAFR0yl0PfEuuU0zwAA">
+<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="JyNLdEcRL0+LtEw4HCCf0QAA">
 <XPD:ATTR name="Name" type="string">samples</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">const DurationSamples&amp;</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">WwYWo68t6Eu2tChICGIpKAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="7Aairuybck+BADkM7q8dXwAA">
+<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="ih1MdfZWmU2kPFFRahM0HQAA">
 <XPD:ATTR name="Name" type="string">complexity</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">const ComplexityFun&amp;</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">WwYWo68t6Eu2tChICGIpKAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[3]" type="UMLParameter" guid="ccWk5ZaYDke0zZU4OqgnjgAA">
-<XPD:ATTR name="Name" type="string">var</XPD:ATTR>
+<XPD:OBJ name="Parameters[3]" type="UMLParameter" guid="Sk+0KeDDQEW+l4gSWFjpcAAA">
+<XPD:ATTR name="Name" type="string">stdev</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">double&amp;</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">WwYWo68t6Eu2tChICGIpKAAA</XPD:REF>
 </XPD:OBJ>
@@ -740,20 +740,24 @@ http://en.cppreference.com/w/cpp/chrono/duration
 <XPD:OBJ name="Operations[3]" type="UMLOperation" guid="tzcO0siEJUySGK3LHL2egwAA">
 <XPD:ATTR name="Name" type="string">estimateStepsNeeded</XPD:ATTR>
 <XPD:REF name="Owner">2i04dp7lvkikkyN4pK2NIQAA</XPD:REF>
-<XPD:ATTR name="#Parameters" type="integer">3</XPD:ATTR>
-<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="UQzpYMC/GUG10a/BCU5V0QAA">
+<XPD:ATTR name="#Parameters" type="integer">4</XPD:ATTR>
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="fXxCFZ31ykGM76jrm32hCAAA">
 <XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">unsigned long long</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">tzcO0siEJUySGK3LHL2egwAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="gamhmB7z7UeZkCJRSQXcDQAA">
+<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="zSUsMHr6PUidCjomniJqfgAA">
 <XPD:ATTR name="Name" type="string">complexity</XPD:ATTR>
-<XPD:ATTR name="TypeExpression" type="string">ComplexityFunc</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">const ComplexityFunc&amp;</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">tzcO0siEJUySGK3LHL2egwAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="HoIYFZk8UUyahL7OXgn74gAA">
+<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="vFaVXBWICkG6YYfpAwPtcwAA">
 <XPD:ATTR name="Name" type="string">duration</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">chrono_seconds</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">tzcO0siEJUySGK3LHL2egwAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Parameters[3]" type="UMLParameter" guid="J0eojggxJ0qdknfh6KOlCQAA">
+<XPD:ATTR name="Name" type="string">seconds&amp; err</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">tzcO0siEJUySGK3LHL2egwAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>

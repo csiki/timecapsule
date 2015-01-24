@@ -10,6 +10,10 @@
 #include <vector>
 #include <string>
 #include <ostream>
+#include <fstream>
+#include <ctime>
+#include <iomanip>
+#include <chrono>
 
 using std::vector;
 using std::string;

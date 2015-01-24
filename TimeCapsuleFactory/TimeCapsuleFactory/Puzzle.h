@@ -8,15 +8,22 @@
 #define _PUZZLE_H
 
 #include <chrono>
-#include <secblock.h>
-#include <integer.h>
+#include <random>
 #include <functional>
 #include <vector>
 #include <cmath>
+#include <secblock.h>
+#include <integer.h>
+#include <dh2.h>
+#include <nbtheory.h>
+#include <cryptlib.h>
+#include <osrng.h>
 
 using std::chrono::nanoseconds;
 using CryptoPP::SecByteBlock;
 using CryptoPP::Integer;
+using CryptoPP::PrimeAndGenerator;
+using CryptoPP::AutoSeededRandomPool;
 using std::vector;
 using std::function;
 using std::chrono::high_resolution_clock;
@@ -39,10 +46,11 @@ public:
 	unsigned long getBase() { return base; }
 
 	virtual DurationSamples funcdur(size_t maxStepToTest, nanoseconds maxStepTimeToTest);
-	virtual SecByteBlock setup(const SecByteBlock& key, unsigned long long times, unsigned long& base, Integer& n);
-	virtual SecByteBlock solve(const SecByteBlock& ckey, unsigned long long times, unsigned long base, const Integer& n);
+	virtual Integer setup(const SecByteBlock& key, unsigned long long times, unsigned long& base, Integer& n);
+	virtual SecByteBlock solve(const Integer& ckey, unsigned long long times, unsigned long base, const Integer& n);
 };
 
 SecByteBlock cryptoInt2SBB(const Integer& integer);
+inline Integer cryptoSBB2Int(const SecByteBlock& sbb);
 
 #endif  //_PUZZLE_H

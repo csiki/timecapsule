@@ -22,7 +22,7 @@ private:
 	vector<T> cdata;
 	SecByteBlock ckey;
 	SecByteBlock iv;
-	SecByteBlock n;
+	SecByteBlock n; // TODO to Integer
 	unsigned long times;
 	unsigned long base;
 
@@ -34,42 +34,42 @@ public:
 
 	bool save(string filepath)
 	{
-
+		// TODO
 	}
 
 	bool load(string filepath)
 	{
-
+		// TODO
 	}
 
 	vector<T> getCryptedData()
 	{
-
+		return cdata;
 	}
 
 	SecByteBlock getCryptedKey()
 	{
-
+		return ckey;
 	}
 
 	SecByteBlock getIV()
 	{
-
-	}
-
-	unsigned long getNumberOfOperations()
-	{
-
-	}
-
-	unsigned long getBase()
-	{
-
+		return iv;
 	}
 
 	SecByteBlock getN()
 	{
+		return n;
+	}
 
+	unsigned long getNumberOfOperations()
+	{
+		return times;
+	}
+
+	unsigned long getBase()
+	{
+		return base;
 	}
 };
 

@@ -16,7 +16,7 @@ ComplexityFunc HardwareSpeedTester::testPuzzleComplexity(Puzzle& puzzle, double&
 	stdev = std::numeric_limits<double>::max();
 	auto complexities = puzzle.getPossibleComplexities();
 	ComplexityFunc bestfit = nullptr;
-	for (auto cf : complexities)
+	for (auto& cf : complexities)
 	{
 		auto tmpfit = fitComplexity(samples, cf, tmpstdev);
 		if (tmpstdev < stdev)
@@ -76,9 +76,18 @@ ComplexityFunc HardwareSpeedTester::fitComplexity(const DurationSamples& samples
 	return fit;
 }
 
-unsigned long long HardwareSpeedTester::estimateStepsNeeded(ComplexityFunc complexity, seconds duration)
+unsigned long long HardwareSpeedTester::estimateStepsNeeded(const ComplexityFunc& complexity, seconds duration, seconds& err)
 {
-	return 0;
+	unsigned long long t;
+	nanoseconds accumulator(0);
+	for (t = 1; accumulator < duration && accumulator.count() >= 0; ++t)
+		accumulator += nanoseconds(complexity(t));
+
+	if (accumulator.count() < 0)
+		throw std::overflow_error("Duration is too long, cannot handle in nanoseconds (not fit in long long converted to nanoseconds)!");
+
+	err = std::chrono::duration_cast<seconds>(accumulator - duration);
+	return t;
 }
 
 bool HardwareSpeedTester::cramerEquationSolver(long double a11, long double a12, long double a21, long double a22, long double y1, long double y2, long double& x1, long double& x2)

@@ -10,27 +10,29 @@
 #include <vector>
 #include <string>
 #include <secblock.h>
+#include <integer.h>
 
 using std::vector;
 using std::string;
 using CryptoPP::SecByteBlock;
+using CryptoPP::Integer;
 
 template <typename T>
 class Capsule
 {
 private:
 	vector<T> cdata;
-	SecByteBlock ckey;
 	SecByteBlock iv;
-	SecByteBlock n; // TODO to Integer
-	unsigned long times;
+	Integer ckey;
+	Integer n;
+	unsigned long long times;
 	unsigned long base;
 
 public:
 	Capsule() : times(0), base(0) {}
 
-	Capsule(const vector<T>& cdata_, const SecByteBlock& ckey_, const SecByteBlock& iv_, const SecByteBlock& n_, unsigned long times_, unsigned long base_)
-		: cdata(cdata_), ckey(ckey_), iv(iv_), n(n_) times(times_), base(base_) {}
+	Capsule(const vector<T>& cdata_, const Integer& ckey_, const SecByteBlock& iv_, const Integer& n_, unsigned long long times_, unsigned long base_)
+		: cdata(cdata_), ckey(ckey_), iv(iv_), n(n_), times(times_), base(base_) {}
 
 	bool save(string filepath)
 	{
@@ -47,7 +49,7 @@ public:
 		return cdata;
 	}
 
-	SecByteBlock getCryptedKey()
+	Integer getCryptedKey()
 	{
 		return ckey;
 	}
@@ -57,12 +59,12 @@ public:
 		return iv;
 	}
 
-	SecByteBlock getN()
+	Integer getN()
 	{
 		return n;
 	}
 
-	unsigned long getNumberOfOperations()
+	unsigned long long getNumberOfOperations()
 	{
 		return times;
 	}

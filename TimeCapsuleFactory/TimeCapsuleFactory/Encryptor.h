@@ -9,6 +9,8 @@
 
 #include <vector>
 #include <secblock.h>
+#include <aes.h>
+#include <modes.h>
 
 using std::vector;
 using CryptoPP::SecByteBlock;
@@ -22,16 +24,17 @@ public:
 		AutoSeededRandomPool rnd;
 
 		// generate a random key
-		SecByteBlock key(0x00, AES::MAX_KEYLENGTH);
-		rnd.GenerateBlock(key, key.size());
+		SecByteBlock tmpkey(0x00, AES::MAX_KEYLENGTH);
+		rnd.GenerateBlock(tmpkey, tmpkey.size());
+		key = tmpkey;
 
 		// generate a random IV
-		byte iv[AES::BLOCKSIZE];
-		rnd.GenerateBlock(iv, AES::BLOCKSIZE);
+		byte tmpiv[AES::BLOCKSIZE];
+		rnd.GenerateBlock(tmpiv, AES::BLOCKSIZE);
+		iv = SecByteBlock(tmpiv, AES::BLOCKSIZE);
 
 		// encrypt
-		CFB_Mode<AES>::Encryption cfbEncryption(Integer(10), 10);
-		//CFB_Mode<AES>::Encryption cfbEncryption(key, key.size(), iv);
+		CFB_Mode<AES>::Encryption cfbEncryption(key, key.size(), tmpiv);
 		cfbEncryption.ProcessData((byte*)data.data(), (byte*)data.data(), data.size());
 
 		return data;
@@ -39,7 +42,7 @@ public:
 
 	vector<T> decrypt(vector<T> cdata, const SecByteBlock& key, const SecByteBlock& iv)
 	{
-		CFB_Mode<AES>::Decryption cfbDecryption(key, key.size(), iv);
+		CFB_Mode<AES>::Decryption cfbDecryption(key, key.size(), iv.BytePtr());
 		cfbDecryption.ProcessData((byte*)cdata.data(), (byte*)cdata.data(), cdata.size());
 
 		return cdata;

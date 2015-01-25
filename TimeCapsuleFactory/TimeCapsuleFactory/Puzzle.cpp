@@ -6,34 +6,55 @@
 
 #include "Puzzle.h"
 
+#include <iostream> // TODO
+
+Puzzle::Puzzle()
+{
+	initComplexities();
+	
+	// rand base
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<unsigned long> basedis(2, 10);
+	base = basedis(gen);
+}
+
+Puzzle::Puzzle(unsigned long base_) : base(base_)
+{
+	initComplexities();
+}
+
 void Puzzle::initComplexities()
 {
-	ComplexityFunc fnlog = [] (unsigned long long n) {
-		return n * std::log(n) + .5;
-	};
-	ComplexityFunc fn2 = [] (unsigned long long n) {
-		return n * n;
-	};
 	ComplexityFunc fexp = [] (unsigned long long n) {
 		return std::exp(n) + .5;
 	};
 	ComplexityFunc f2exp = [] (unsigned long long n) {
 		return std::pow(2, n) + .5;
 	};
-	possibleComplexities.resize(4);
-	possibleComplexities.push_back(fnlog);
-	possibleComplexities.push_back(fn2);
+	ComplexityFunc fnexp = [] (unsigned long long n) {
+		return n * std::exp(n) + .5;
+	};
+	ComplexityFunc fnnexp = [] (unsigned long long n) {
+		return n * n * std::exp(n) + .5;
+	};
 	possibleComplexities.push_back(fexp);
 	possibleComplexities.push_back(f2exp);
+	possibleComplexities.push_back(fnexp);
+	possibleComplexities.push_back(fnnexp);
 }
 
-DurationSamples Puzzle::funcdur(size_t maxStepToTest, nanoseconds maxStepTimeToTest)
+DurationSamples Puzzle::funcdur(size_t maxStepToTest, nanoseconds maxStepTimeToTest, nanoseconds sampleThreshold)
 {
+	assert(maxStepTimeToTest > sampleThreshold);
+
 	// sample till maxStepTimeToTest or maxStepToTest is reached
-	unsigned long long i = 0;
-	nanoseconds steptime(0);
+	unsigned long long i = 1;
+	nanoseconds steptime(0), acc(0);
 	Integer num = base;
-	DurationSamples samples(maxStepToTest);
+	DurationSamples samples;
+
+	std::cout << "ACTUAL SAMPLING: " << std::endl; // TODO
 	while (i < maxStepToTest && steptime < maxStepTimeToTest)
 	{
 		auto start = high_resolution_clock::now();
@@ -41,7 +62,12 @@ DurationSamples Puzzle::funcdur(size_t maxStepToTest, nanoseconds maxStepTimeToT
 		auto end = high_resolution_clock::now();
 		
 		steptime = end - start;
-		samples.push_back(std::make_pair(i, steptime));
+		acc += steptime;
+		if (steptime > sampleThreshold)
+		{
+			samples.push_back(std::make_pair(i, acc));
+			std::cout << i << ": " << std::chrono::duration_cast<std::chrono::seconds>(acc).count() << std::endl; // TODO
+		}
 		++i;
 	}
 
@@ -49,7 +75,7 @@ DurationSamples Puzzle::funcdur(size_t maxStepToTest, nanoseconds maxStepTimeToT
 }
 
 // according to http://www.hashcash.org/papers/time-lock.pdf
-Integer Puzzle::setup(const SecByteBlock& key, unsigned long long times, unsigned long& base, Integer& n)
+Integer Puzzle::setup(const SecByteBlock& key, unsigned long long times, Integer& n)
 {
 	// rand delta (1 or -1)
 	std::random_device drd;
@@ -60,54 +86,39 @@ Integer Puzzle::setup(const SecByteBlock& key, unsigned long long times, unsigne
 
 	// generate primes
 	AutoSeededRandomPool rnd;
-	PrimeAndGenerator pgen(delta, rnd, 1024, 1024);
+	PrimeAndGenerator pgen(delta, rnd, 1024, 1023);
 	auto p = pgen.Prime();
 	auto q = pgen.SubPrime();
 
 	// generate composite modulus & fi(n)
 	n = p * q;
 	auto fin = (p - 1) * (q - 1);
-	
-	// pick base
-	std::uniform_int_distribution<unsigned long> basedis(2, 10);
-	base = basedis(gen);
 
 	// encrypt key
 	auto e = Integer::Power2(times) % fin;
 	auto b = CryptoPP::ModularExponentiation(Integer(base), e, n);
-	auto ckey = cryptoSBB2Int(key) + b; // TODO + is append
+	auto ckey = (cryptoSBB2Int(key) + b) % n;
 
 	return ckey; // return key as integer so no further Integer-SecByteBlock conversion is needed here, neither at solve
 }
 
 // should be optimal as possible
-SecByteBlock Puzzle::solve(const Integer& ckey, unsigned long long times, unsigned long base, const Integer& n)
+SecByteBlock Puzzle::solve(const Integer& ckey, unsigned long long times, const Integer& n)
 {
-	Integer num(base);
-	--times; // one less as ModularExponentiation is used instead at the end
-	while (times--) num *= num;
-	num = CryptoPP::ModularExponentiation(num, num, n);
+	Integer a(base);
+	while (times--) a *= a;
+	auto b = a % n;
 
-	return cryptoInt2SBB(ckey - num); // TODO check if the same key is converted back
+	return cryptoInt2SBB(ckey - b);
 }
 
 SecByteBlock cryptoInt2SBB(const Integer& integer)
 {
-
-	// TODO IMPLEMENT THIS SHIT integer.cpp:3086
-	/*for (size_t i=inputLen; i > 0; i--)
-	{
-		bt.Get(b);
-		reg[(i-1)/WORD_SIZE] |= word(b) << ((i-1)%WORD_SIZE)*8;
-	}*/
-
 	byte* bytearr = new byte[integer.ByteCount()];
 	for (int i = integer.ByteCount() - 1; i >= 0; --i)
-	{
 		bytearr[i] = integer.GetByte(integer.ByteCount() - 1 - i);
-	}
-	SecByteBlock sbb(bytearr, integer.ByteCount());
-	return sbb;
+	
+	return SecByteBlock(bytearr, integer.ByteCount());
 }
 
 inline Integer cryptoSBB2Int(const SecByteBlock& sbb)

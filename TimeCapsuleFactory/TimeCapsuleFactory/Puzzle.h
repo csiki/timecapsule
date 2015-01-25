@@ -27,7 +27,7 @@ using CryptoPP::AutoSeededRandomPool;
 using std::vector;
 using std::function;
 using std::chrono::high_resolution_clock;
-typedef function<unsigned long long (unsigned long long)> ComplexityFunc;
+typedef function<unsigned long long (unsigned long long)> ComplexityFunc; // TODO FIXME gotto work with Integer as return type
 typedef vector<std::pair<unsigned long long, nanoseconds>> DurationSamples;
 
 class Puzzle
@@ -40,14 +40,14 @@ protected:
 	vector<ComplexityFunc> possibleComplexities;
 
 public:
-	Puzzle() : base(2) { initComplexities(); }
-	Puzzle(unsigned long base_) : base(base_) { initComplexities(); }
+	Puzzle(); // TODO sampleThreshold protected attributumnak, construktorba megadhato
+	Puzzle(unsigned long base_);
 	vector<ComplexityFunc> getPossibleComplexities() { return possibleComplexities; }
 	unsigned long getBase() { return base; }
 
-	virtual DurationSamples funcdur(size_t maxStepToTest, nanoseconds maxStepTimeToTest);
-	virtual Integer setup(const SecByteBlock& key, unsigned long long times, unsigned long& base, Integer& n);
-	virtual SecByteBlock solve(const Integer& ckey, unsigned long long times, unsigned long base, const Integer& n);
+	virtual DurationSamples funcdur(size_t maxStepToTest, nanoseconds maxStepTimeToTest, nanoseconds sampleThreshold = nanoseconds(1));
+	virtual Integer setup(const SecByteBlock& key, unsigned long long times, Integer& n);
+	virtual SecByteBlock solve(const Integer& ckey, unsigned long long times, const Integer& n);
 };
 
 SecByteBlock cryptoInt2SBB(const Integer& integer);

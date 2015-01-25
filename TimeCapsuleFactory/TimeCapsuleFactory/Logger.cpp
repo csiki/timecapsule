@@ -26,7 +26,7 @@ void Logger::save(string filename)
 		<< "TimeCapsuleFactory LOG | "
 		<< std::put_time(std::localtime(&in_time_t), "%Y-%m-%d %X")
 		<< std::endl << "============================================"
-		<< std::endl << std::endl;
+		<< std::endl;
 	
 	for (auto& line : logs)
 		outfile << "| " << line << std::endl;
@@ -41,7 +41,7 @@ void Logger::print(ostream& out)
 		<< "TimeCapsuleFactory LOG | "
 		<< std::put_time(std::localtime(&in_time_t), "%Y-%m-%d %X")
 		<< std::endl << "============================================"
-		<< std::endl << std::endl;
+		<< std::endl;
 	
 	for (auto& line : logs)
 		out << "| " << line << std::endl;

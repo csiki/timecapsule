@@ -6,21 +6,27 @@
 
 #include "HardwareSpeedTester.h"
 
-ComplexityFunc HardwareSpeedTester::testPuzzleComplexity(Puzzle& puzzle, double& stdev, size_t maxStepToTest, nanoseconds maxStepTimeToTest)
+#include <iostream> // TODO rm
+
+ComplexityFunc HardwareSpeedTester::testPuzzleComplexity(Puzzle& puzzle, long double& stdev, size_t maxStepToTest, nanoseconds maxStepTimeToTest, nanoseconds sampleThreshold, DurationSamples samples)
 {
 	// sample calculation times
-	auto samples = puzzle.funcdur(maxStepToTest, maxStepTimeToTest);
+	if (samples.empty())
+		samples = puzzle.funcdur(maxStepToTest, maxStepTimeToTest, sampleThreshold);
 
 	// test & fit all complexity functions on the samples
-	double tmpstdev;
-	stdev = std::numeric_limits<double>::max();
+	long double bestmse = std::numeric_limits<long double>::max();
+	stdev = std::numeric_limits<long double>::max();
 	auto complexities = puzzle.getPossibleComplexities();
 	ComplexityFunc bestfit = nullptr;
 	for (auto& cf : complexities)
 	{
+		long double tmpstdev;
 		auto tmpfit = fitComplexity(samples, cf, tmpstdev);
-		if (tmpstdev < stdev)
+		auto tmpmse = calcMSE(samples, tmpfit);
+		if (tmpmse < bestmse)
 		{
+			bestmse = tmpmse;
 			stdev = tmpstdev;
 			bestfit = tmpfit;
 		}
@@ -28,7 +34,7 @@ ComplexityFunc HardwareSpeedTester::testPuzzleComplexity(Puzzle& puzzle, double&
 	return bestfit;
 }
 
-ComplexityFunc HardwareSpeedTester::fitComplexity(const DurationSamples& samples, const ComplexityFunc& complexity, double& stdev)
+ComplexityFunc HardwareSpeedTester::fitComplexity(const DurationSamples& samples, const ComplexityFunc& complexity, long double& stdev)
 {
 	// take every sample pairs
 	vector<long double> biasvals(samples.size() * (samples.size() - 1));
@@ -49,28 +55,32 @@ ComplexityFunc HardwareSpeedTester::fitComplexity(const DurationSamples& samples
 	}
 
 	// calculate mean and standard deviation
-	auto bmean = std::accumulate(biasvals.begin(), biasvals.end(), 0);
-	auto mmean = std::accumulate(mulvals.begin(), mulvals.end(), 0);
+	long double bmean = std::accumulate(biasvals.begin(), biasvals.end(), (long double)0.0);
+	long double mmean = std::accumulate(mulvals.begin(), mulvals.end(), (long double)0.0);
 	bmean /= biasvals.size(); // bias mean
 	mmean /= mulvals.size();  // multiplier mean
 
 	vector<long double> diff(biasvals.size());
 	std::transform(biasvals.begin(), biasvals.end(), diff.begin(),
 		std::bind2nd(std::minus<long double>(), bmean));
-	auto sqsum = std::inner_product(diff.begin(), diff.end(), diff.begin(), 0);
+	auto sqsum = std::inner_product(diff.begin(), diff.end(), diff.begin(), (long double)0.0);
 	auto bstd = std::sqrt(sqsum / biasvals.size());	// bias standard deviation
 
 	diff.clear(); diff.resize(mulvals.size());
 	std::transform(mulvals.begin(), mulvals.end(), diff.begin(),
 		std::bind2nd(std::minus<long double>(), mmean));
-	sqsum = std::inner_product(diff.begin(), diff.end(), diff.begin(), 0);
+	sqsum = std::inner_product(diff.begin(), diff.end(), diff.begin(), (long double)0.0);
 	auto mstd = std::sqrt(sqsum / mulvals.size());	// multiplier standard deviation
 
 	stdev = (bstd + mstd) / 2.0; // mean of the 2 standard deviations
 
+	std::cout << "MEANS: " << bmean << ", " << mmean << "; DEV: " << stdev << std::endl; // TODO
+
 	// generate most fitting function
-	ComplexityFunc fit = [complexity, bmean, mmean] (unsigned long long n) { // FIXME TODO is this alright with the ComplexityFunc type?
-		return bmean + mmean * complexity(n);
+	ComplexityFunc fit = [complexity, bmean, mmean] (unsigned long long n) {
+		auto res = bmean + mmean * complexity(n + 1); // FIXME +1 because it shifts one somehow ???!!!
+		if (res < 0) return (unsigned long long)0;
+		return (unsigned long long)res;
 	};
 
 	return fit;
@@ -79,14 +89,14 @@ ComplexityFunc HardwareSpeedTester::fitComplexity(const DurationSamples& samples
 unsigned long long HardwareSpeedTester::estimateStepsNeeded(const ComplexityFunc& complexity, seconds duration, seconds& err)
 {
 	unsigned long long t;
-	nanoseconds accumulator(0);
-	for (t = 1; accumulator < duration && accumulator.count() >= 0; ++t)
-		accumulator += nanoseconds(complexity(t));
+	nanoseconds currdur(0);
+	for (t = 0; currdur < duration && currdur.count() >= 0; ++t)
+		currdur = nanoseconds(complexity(t + 1));
 
-	if (accumulator.count() < 0)
+	if (currdur.count() < 0)
 		throw std::overflow_error("Duration is too long, cannot handle in nanoseconds (not fit in long long converted to nanoseconds)!");
 
-	err = std::chrono::duration_cast<seconds>(accumulator - duration);
+	err = std::chrono::duration_cast<seconds>(currdur - duration);
 	return t;
 }
 
@@ -100,4 +110,15 @@ bool HardwareSpeedTester::cramerEquationSolver(long double a11, long double a12,
 		return true;
 	}
 	return false;
+}
+
+long double HardwareSpeedTester::calcMSE(const DurationSamples& samples, const ComplexityFunc& fit)
+{
+	unsigned long long mse = 0;
+	for (auto& sample : samples)
+	{
+		auto diff = (fit(sample.first) - sample.second.count());
+		mse += diff * diff;
+	}
+	return mse / samples.size();
 }

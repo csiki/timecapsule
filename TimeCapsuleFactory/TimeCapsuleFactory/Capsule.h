@@ -9,8 +9,13 @@
 
 #include <vector>
 #include <string>
+#include <fstream>
+#include <type_traits>
+
 #include <secblock.h>
 #include <integer.h>
+
+#include "Puzzle.h"
 
 using std::vector;
 using std::string;
@@ -36,12 +41,45 @@ public:
 
 	bool save(string filepath)
 	{
-		// TODO
+		// file structure: [base]\n[times]\n[n]\n[ckey]\n[iv]\n[data]
+		// iv is converted to integer for convinient decoding
+		// data is converted to string
+		Integer intiv = cryptoSBB2Int(iv);
+		ofstream fout(filepath, std::ios_base::trunc);
+
+		fout << base << std::endl;
+		fout << times << std::endl;
+		fout << n << std::endl;
+		fout << ckey << std::endl;
+		fout << intiv << std::endl;
+
+		// data
+		for (auto& c : cdata)
+			fout << c;
+
+		return true;
 	}
 
 	bool load(string filepath)
 	{
-		// TODO
+		Integer intiv;
+		ifstream fin(filepath);
+
+		fin >> base;
+		fin >> times;
+		fin >> n;
+		fin >> ckey;
+		fin >> intiv;
+
+		// data
+		T c;
+		while (!fin.eof())
+		{
+			fin >> c;
+			cdata.push_back(c);
+		}
+
+		return true;
 	}
 
 	vector<T> getCryptedData()

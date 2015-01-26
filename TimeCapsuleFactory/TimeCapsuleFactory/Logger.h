@@ -9,6 +9,7 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 #include <ostream>
 #include <fstream>
 #include <ctime>
@@ -23,12 +24,14 @@ class Logger
 {
 private:
 	static vector<string> logs;
-	Logger();
+	static bool promptPrint;
+	Logger() {}
 
 public:
 	static void log(string line);
 	static void save(string filename);
 	static void print(ostream& out);
+	static void printPromptlyToStdOut() { promptPrint = true; }
 };
 
 #endif  //_LOGGER_H

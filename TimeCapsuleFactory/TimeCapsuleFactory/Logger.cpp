@@ -7,13 +7,15 @@
 #include "Logger.h"
 
 vector<string> Logger::logs;
-
-Logger::Logger() {}
+bool Logger::promptPrint = false;
 
 void Logger::log(string line)
 {
 	if (!line.empty())
 		logs.push_back(line);
+	
+	if (promptPrint)
+		std::cout << "| " << line << std::endl;
 }
 
 void Logger::save(string filename)

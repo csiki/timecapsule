@@ -6,9 +6,10 @@
 
 #include "HardwareSpeedTester.h"
 
-#include <iostream> // TODO rm
+HardwareSpeedTester::HardwareSpeedTester(size_t maxStepToTest_, nanoseconds maxStepTimeToTest_, nanoseconds sampleThreshold_)
+	: maxStepToTest(maxStepToTest_), maxStepTimeToTest(maxStepTimeToTest_), sampleThreshold(sampleThreshold_) {}
 
-ComplexityFunc HardwareSpeedTester::testPuzzleComplexity(Puzzle& puzzle, long double& stdev, size_t maxStepToTest, nanoseconds maxStepTimeToTest, nanoseconds sampleThreshold, DurationSamples samples)
+ComplexityFunc HardwareSpeedTester::testPuzzleComplexity(Puzzle& puzzle, long double& stdev, DurationSamples samples)
 {
 	// sample calculation times
 	if (samples.empty())
@@ -73,8 +74,6 @@ ComplexityFunc HardwareSpeedTester::fitComplexity(const DurationSamples& samples
 	auto mstd = std::sqrt(sqsum / mulvals.size());	// multiplier standard deviation
 
 	stdev = (bstd + mstd) / 2.0; // mean of the 2 standard deviations
-
-	std::cout << "MEANS: " << bmean << ", " << mmean << "; DEV: " << stdev << std::endl; // TODO
 
 	// generate most fitting function
 	ComplexityFunc fit = [complexity, bmean, mmean] (unsigned long long n) {

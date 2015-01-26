@@ -14,6 +14,8 @@
 
 using std::vector;
 using CryptoPP::SecByteBlock;
+using CryptoPP::AES;
+using CryptoPP::CFB_Mode;
 
 template <typename T>
 class Encryptor

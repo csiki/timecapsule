@@ -10,7 +10,7 @@
 #include <vector>
 #include <chrono>
 #include <exception>
-#include <secblock.h> // TODO change all in the form #include <cryptopp/[XY].h>
+#include <secblock.h>
 #include "Puzzle.h"
 #include "Capsule.h"
 #include "HardwareSpeedTester.h"
@@ -25,8 +25,11 @@ using CryptoPP::SecByteBlock;
 template <typename DataType = char>
 class TimeCapsuleFactory
 {
-public:
+private:
+	HardwareSpeedTester speedTester;
 
+public:
+	TimeCapsuleFactory(HardwareSpeedTester speedTester_ = HardwareSpeedTester()) : speedTester(speedTester_) {}
 	Capsule<DataType> createTimeCapsule(Puzzle& puzzle, vector<DataType> data, seconds duration)
 	{
 		if (sizeof(DataType) != sizeof(byte))
@@ -34,13 +37,12 @@ public:
 
 		// determine operation time of a single step in solving the puzzle
 		long double stdev;
-		HardwareSpeedTester hst;
-		auto opcomp = hst.testPuzzleComplexity(puzzle, stdev);
+		auto opcomp = speedTester.testPuzzleComplexity(puzzle, stdev);
 		Logger::log("Best complexity function is fitted with standard deviation: " + std::to_string(stdev));
 
 		// determine number of steps needed to spend the given duration
 		seconds err;
-		auto times = hst.estimateStepsNeeded(opcomp, duration, err);
+		auto times = speedTester.estimateStepsNeeded(opcomp, duration, err);
 		Logger::log("Number of steps needed: " + std::to_string(times)
 			+ "; estimated error: " + std::to_string(err.count()) + " seconds");
 

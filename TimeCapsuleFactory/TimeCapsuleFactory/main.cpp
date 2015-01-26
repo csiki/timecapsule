@@ -1,140 +1,175 @@
 
-#include <cstdio>
 #include <iostream>
-#include <osrng.h>
-#include <iostream>
-#include <string>
-#include <cstdlib>
-#include <cryptlib.h>
-#include <hex.h>
-#include <filters.h>
-#include <des.h>
-#include <modes.h>
-#include <secblock.h>
-#include <iostream>
-#include <string>
-#include <modes.h>
-#include <aes.h>
-#include <filters.h>
-#include <integer.h>
-
+#include <fstream>
+#include <algorithm>
+#include <type_traits>
 #include "TimeCapsuleFactory.h"
-#include "Puzzle.h"
-#include "Logger.h"
-#include "Encryptor.h"
-
-using CryptoPP::AutoSeededRandomPool;
-using CryptoPP::SecByteBlock;
-using CryptoPP::AES;
-using CryptoPP::CFB_Mode;
-using CryptoPP::Integer;
 
 using namespace std;
 
-// TEST FUNCTIONS
-void testFactory();
-void testSpeedTester();
-void testEncryptor();
-void testPuzzle();
-
+// TODO log more frequently
 // TODO update StarUML when ready
+// TODO test binary files
+// TODO implement TimeCapsule module
+// TODO Integer return ComplexityFunctionnek ?
+// TODO change all in the form #include "cryptopp/[XY].h" and make a readme for installing crypto++; should be able to include in the TimeCapsule module the same way
+
+template <typename T>
+vector<T> readFileToVector(string filepath)
+{
+	std::ifstream fin;
+	if (std::is_same<T, char>::value)
+		fin.open(filepath);
+	else if (sizeof(T) == sizeof(char))
+		fin.open(filepath, std::ios::binary);
+	else
+		return vector<T>();
+
+	if (!fin.is_open()) return vector<T>(); // no file found
+
+	fin.seekg(0, std::ios::end);
+	size_t size = fin.tellg();
+	fin.seekg(0, std::ios::beg);
+
+	vector<T> buffer(size);
+	fin.read((char*)buffer.data(), size);
+	return buffer;
+}
+
+template <typename T>
+vector<T> readRawToVector(int argc, char* argv[], int from)
+{
+	vector<T> buffer;
+	string acc;
+	for (size_t i = from; i < argc; ++i)
+	{
+		acc += argv[i];
+		acc += ' ';
+	}
+	for (size_t i = 0; i < acc.length() - 1; ++i) // emit the last space
+		buffer.push_back(acc.at(i));
+
+	return buffer;
+}
 
 /// Command line arguments:
-/// argv[0] - datatype: ft | fb | rt | rb as text file, binary file, raw text, raw binary
-/// argv[1] - duration of encryption (in seconds)
-/// argv[2] - puzzle type [disregarded]
-/// argv[3] - number of puzzle steps (if known already, if not type zero (0))
-/// argv[4] - data (filepath if datatype=f_ or data itself if datatype=r_)
+/// argv[1] - datatype: ft | fb | rt | rb (text file, binary file, raw text, or raw binary)
+/// argv[2] - minimum time needed for decryption (in seconds)
+/// argv[3] - time for the capsule creation (in seconds; the more, the better; at least 1 minute)
+/// argv[4] - puzzle type (optional; disregarded if given as only the repeated squaring puzzle is implemented)
+/// argv[5] - number of puzzle steps (if unknown give 0; if given min. time for decryption is disregarded)
+/// argv[6] - file name and path of the capsule to save (no spaces)
+/// rest... - data to encrypt (path of file with name if datatype==f_ or data itself if datatype=r_)
 int main(int argc, char* argv[])
 {
-	// TODO
+	if (argc < 8)
+	{
+		cerr << "Too few arguments! Arguments in order:" << endl
+			<< " - datatype: ft | fb | rt | rb (text file, binary file, raw text or raw binary)" << endl
+			<< " - minimum time needed for decryption (in seconds)" << endl
+			<< " - time for the capsule creation roughly (in seconds; the more, the better; at least 1 minute)" << endl
+			<< " - puzzle type (disregarded as only the repeated squaring puzzle is implemented)" << endl
+			<< " - number of puzzle steps (if unknown give 0; if given min. time for decryption is disregarded)" << endl
+			<< " - file name and path of the capsule to save (may not contain white-spaces)" << endl
+			<< " - data to encrypt (path of file with name if datatype==f_ or data itself if datatype=r_)" << endl << endl
+			<< "Example command: tcfactory rt 31536000 120 _ 0 path/to/capsule.dat Hey! Please enrypt me for 1 year! It will take about 120*log(120) seconds!" << endl;
+		return 1;
+	}
+
+	/// datatype independent stuff
+	string puzzleType(argv[4]); // not used
+	string capsulePath(argv[6]);
+	unsigned long long duration;
+	unsigned long long timeForCreation;
+	unsigned long long numberOfSteps;
+	if ( !(sscanf(argv[2], "%llu", &duration)
+		&& sscanf(argv[3], "%llu", &timeForCreation)
+		&& sscanf(argv[5], "%llu", &numberOfSteps)) )
+	{
+		cerr << "One of the minimum time needed for decryption, the time for the capsule creation, or the number of puzzle steps integer arguments cannot be interpreted as number!" << endl;
+		return 4;
+	}
+	// determination of sampleThreshold: least nanoseconds that the hardware is able to measure * 2 + 1
+	Puzzle puzzle;
+	auto sample = puzzle.funcdur(1, seconds(60), nanoseconds(1)); // 60 seconds parameter could be anything that is >0
+	nanoseconds sampleThreshold = sample[0].second * 2 + nanoseconds(1);
+	HardwareSpeedTester hst(100000, seconds(timeForCreation), sampleThreshold);
+	Logger::log("Computed sample threshold: " + std::to_string(sampleThreshold.count()) + " ns");
+
+	/// datatype dependent stuff
+	char datatype = argv[1][1];
+	if (datatype == 't') // text
+	{
+		// retrieve data
+		vector<char> data;
+		if (argv[1][0] == 'f')
+		{
+			data = readFileToVector<char>(argv[7]);
+		}
+		else if (argv[1][0] == 'r')
+			data = readRawToVector<char>(argc, argv, 7);
+		else
+		{
+			cerr << "Wrong datatype! Possible values: ft | fb | rt | rb (text file, binary file, raw text or raw binary)!" << endl;
+			return 2;
+		}
+		// check for empty data
+		if (data.size() == 0)
+		{
+			cerr << "No raw data or file is found, or empty file is given!" << endl;
+			return 3;
+		}
+
+		// create & save time capsule
+		TimeCapsuleFactory<char> factory(hst);
+		Capsule<char> capsule;
+		if (numberOfSteps == 0)
+			capsule = factory.createTimeCapsule(puzzle, data, seconds(duration));
+		else
+			capsule = factory.createTimeCapsule(puzzle, data, seconds(duration), numberOfSteps);
+		
+		if (capsule.save(capsulePath))
+			Logger::log("Capsule is successfully saved to " + capsulePath);
+	}
+	else if (datatype == 'b') // binary
+	{
+		// retrieve data
+		vector<unsigned char> data;
+		if (argv[1][0] == 'f')
+			data = readFileToVector<unsigned char>(argv[7]);
+		else if (argv[1][0] == 'r')
+			data = readRawToVector<unsigned char>(argc, argv, 7);
+		else
+		{
+			cerr << "Wrong datatype! Possible values: ft | fb | rt | rb (text file, binary file, raw text or raw binary)!" << endl;
+			return 2;
+		}
+		// check for empty data
+		if (data.size() == 0)
+		{
+			cerr << "No raw data is found, or empty file is given!" << endl;
+			return 3;
+		}
+
+		// create & save time capsule
+		TimeCapsuleFactory<unsigned char> factory(hst);
+		Capsule<unsigned char> capsule;
+		if (numberOfSteps == 0)
+			capsule = factory.createTimeCapsule(puzzle, data, seconds(duration));
+		else
+			capsule = factory.createTimeCapsule(puzzle, data, seconds(duration), numberOfSteps);
+		
+		if (capsule.save(capsulePath))
+			Logger::log("Capsule is successfully saved to " + capsulePath);
+	}
+	else
+	{
+		cerr << "Wrong datatype! Possible values: ft | fb | rt | rb (text file, binary file, raw text or raw binary)!" << endl;
+		return 2;
+	}
+
+	Logger::print(cout);
 
 	return 0;
 }
 
-void testFactory()
-{
-	Puzzle p;
-	TimeCapsuleFactory<char> tcf;
-	char rawdata[] = "Hey, I hope it will finish in time.. tho probably not :D ...";
-	vector<char> data(rawdata, rawdata + sizeof(rawdata));
-	auto duration = seconds(5);
-	auto capsule = tcf.createTimeCapsule(p, data, duration);
-
-	auto start = chrono::high_resolution_clock::now();
-	auto key = p.solve(capsule.getCryptedKey(), capsule.getNumberOfOperations(), capsule.getN());
-	auto end = chrono::high_resolution_clock::now();
-
-	cout << "Time specified to decode: " << duration.count() << " seconds" << endl;
-	cout << "Time taken to decode: " << chrono::duration_cast<seconds>(end - start).count() << " seconds" << endl;
-	
-	Encryptor<char> cr;
-	auto databack = cr.decrypt(capsule.getCryptedData(), key, capsule.getIV());
-	cout << "Data decrypted: " << databack.data() << endl;
-
-	Logger::print(std::cout);
-}
-
-void testSpeedTester()
-{
-	DurationSamples samples;
-	samples.push_back(std::make_pair((unsigned long long) 15, nanoseconds(1975700)));		// 0
-	samples.push_back(std::make_pair((unsigned long long) 17, nanoseconds(4976700)));		// 0
-	samples.push_back(std::make_pair((unsigned long long) 18, nanoseconds(11981400)));		// 0
-	samples.push_back(std::make_pair((unsigned long long) 19, nanoseconds(34999300)));		// 0
-	samples.push_back(std::make_pair((unsigned long long) 20, nanoseconds(99043200)));		// 0
-	samples.push_back(std::make_pair((unsigned long long) 21, nanoseconds(292173300)));		// 0
-	samples.push_back(std::make_pair((unsigned long long) 22, nanoseconds(892574500)));		// 0
-	samples.push_back(std::make_pair((unsigned long long) 23, nanoseconds(2643745200)));	// 2
-	samples.push_back(std::make_pair((unsigned long long) 24, nanoseconds(7937287000)));	// 7
-	samples.push_back(std::make_pair((unsigned long long) 25, nanoseconds(23825904400)));	// 23
-	samples.push_back(std::make_pair((unsigned long long) 26, nanoseconds(71674877300)));	// 71
-
-	Puzzle p(2);
-	HardwareSpeedTester hpt;
-	long double stdev;
-
-	auto func = hpt.testPuzzleComplexity(p, stdev, 1000, seconds(30), nanoseconds(50), samples);
-
-	cout << endl << "ESTIMATE: " << endl;
-	for (size_t i = 1; i < 50; ++i)
-		cout << i << ": " << func(i) / 1000000000.0 << endl;
-	cout << "STDEV:" << stdev << endl;
-}
-
-void testPuzzle()
-{
-	Puzzle p(2);
-	cout << "base: " << p.getBase() << endl;
-	AutoSeededRandomPool rnd;
-	SecByteBlock key(0x00, AES::MAX_KEYLENGTH);
-	rnd.GenerateBlock(key, key.size());
-
-	// setup & solve
-	Integer n;
-	auto ckey = p.setup(key, 10, n);
-	auto keyback = p.solve(ckey, 10, n);
-	assert(key == keyback);
-	cout << "Key converted back successfully!" << endl;
-
-	// funcdur
-	auto samples = p.funcdur(1000, seconds(5), nanoseconds(1000));
-	for (auto& s : samples)
-		cout << s.first << ": " << s.second.count() << endl;
-}
-
-void testEncryptor()
-{
-	char plainText[] = "Hello! How are you.";
-	vector<char> data(plainText, plainText + 20);
-	Encryptor<char> enc;
-	SecByteBlock key;
-	SecByteBlock iv;
-
-	auto cdata = enc.encrypt(data, key, iv);
-	auto databack = enc.decrypt(cdata, key, iv);
-	assert(data == databack);
-
-	cout << cdata.data() << endl;
-	cout << databack.data() << endl;
-}

@@ -6,8 +6,6 @@
 
 #include "Puzzle.h"
 
-#include <iostream> // TODO
-
 Puzzle::Puzzle()
 {
 	initComplexities();
@@ -54,8 +52,7 @@ DurationSamples Puzzle::funcdur(size_t maxStepToTest, nanoseconds maxStepTimeToT
 	Integer num = base;
 	DurationSamples samples;
 
-	std::cout << "ACTUAL SAMPLING: " << std::endl; // TODO
-	while (i < maxStepToTest && steptime < maxStepTimeToTest)
+	while (samples.size() < maxStepToTest && steptime < maxStepTimeToTest)
 	{
 		auto start = high_resolution_clock::now();
 		num *= num; // squaring
@@ -64,10 +61,7 @@ DurationSamples Puzzle::funcdur(size_t maxStepToTest, nanoseconds maxStepTimeToT
 		steptime = end - start;
 		acc += steptime;
 		if (steptime > sampleThreshold)
-		{
 			samples.push_back(std::make_pair(i, acc));
-			std::cout << i << ": " << std::chrono::duration_cast<std::chrono::seconds>(acc).count() << std::endl; // TODO
-		}
 		++i;
 	}
 

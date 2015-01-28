@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <type_traits>
 #include "TimeCapsuleFactory.h"
+#include "Capsule.h"
+#include "test_functions.h"
 
 using namespace std;
 
@@ -13,6 +15,8 @@ using namespace std;
 // TODO implement TimeCapsule module
 // TODO Integer return ComplexityFunctionnek ?
 // TODO change all in the form #include "cryptopp/[XY].h" and make a readme for installing crypto++; should be able to include in the TimeCapsule module the same way
+// TODO multithreading?
+// TODO csak külön menüpont/argumentum legyen alra hogy dekódol vagy factory-t használ
 
 template <typename T>
 vector<T> readFileToVector(string filepath)
@@ -62,6 +66,24 @@ vector<T> readRawToVector(int argc, char* argv[], int from)
 /// rest... - data to encrypt (path of file with name if datatype==f_ or data itself if datatype=r_)
 int main(int argc, char* argv[])
 {
+
+	/*if (argc > 1)
+	{
+		Capsule<char> capsule;
+		capsule.load(argv[1]);
+
+		Puzzle puzzle(capsule.getBase());
+		auto key = puzzle.solve(capsule.getCryptedKey(), capsule.getNumberOfOperations(), capsule.getN());
+
+		Encryptor<char> enc;
+		auto detidata = enc.decrypt(capsule.getCryptedData(), key, capsule.getIV());
+
+		cout << "Uzenet a multbol, amit a jovobe kuldtek: ";
+		cout << detidata.data() << endl;
+	}*/
+
+	Logger::printPromptlyToStdOut();
+
 	if (argc < 8)
 	{
 		cerr << "Too few arguments! Arguments in order:" << endl
@@ -170,6 +192,8 @@ int main(int argc, char* argv[])
 
 	Logger::print(cout);
 
+
+	
 	return 0;
 }
 

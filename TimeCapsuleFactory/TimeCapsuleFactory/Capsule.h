@@ -70,6 +70,7 @@ public:
 		fin >> n;
 		fin >> ckey;
 		fin >> intiv;
+		iv = cryptoInt2SBB(intiv);
 
 		// data
 		T c;

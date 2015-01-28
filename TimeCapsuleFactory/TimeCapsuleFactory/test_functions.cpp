@@ -3,24 +3,29 @@
 void testFactory()
 {
 	Puzzle p;
-	TimeCapsuleFactory<char> tcf;
+	HardwareSpeedTester hst(1000, seconds(20), seconds(10));
+	TimeCapsuleFactory<char> tcf(hst);
 	char rawdata[] = "Hey, I hope it will finish in time.. tho probably not :D ...";
 	vector<char> data(rawdata, rawdata + sizeof(rawdata));
 	auto duration = seconds(5);
 	auto capsule = tcf.createTimeCapsule(p, data, duration);
 
 	capsule.save("capsule.dat");
-	capsule.load("capsule.dat");
+
+	Capsule<char> capsule2;
+	capsule2.load("capsule.dat");
+
+	Puzzle p2(capsule2.getBase());
 
 	auto start = chrono::high_resolution_clock::now();
-	auto key = p.solve(capsule.getCryptedKey(), capsule.getNumberOfOperations(), capsule.getN());
+	auto key = p2.solve(capsule2.getCryptedKey(), capsule2.getNumberOfOperations(), capsule2.getN());
 	auto end = chrono::high_resolution_clock::now();
 
 	cout << "Time specified to decode: " << duration.count() << " seconds" << endl;
 	cout << "Time taken to decode: " << chrono::duration_cast<seconds>(end - start).count() << " seconds" << endl;
 	
 	Encryptor<char> cr;
-	auto databack = cr.decrypt(capsule.getCryptedData(), key, capsule.getIV());
+	auto databack = cr.decrypt(capsule2.getCryptedData(), key, capsule2.getIV());
 	cout << "Data decrypted: " << databack.data() << endl;
 
 	Logger::print(std::cout);

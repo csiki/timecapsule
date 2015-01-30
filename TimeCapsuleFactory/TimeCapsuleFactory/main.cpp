@@ -86,7 +86,7 @@ int main(int argc, char* argv[])
 
 	if (argc < 8)
 	{
-		cerr << "Too few arguments! Arguments in order:" << endl
+		cerr << "More arguments needed! Arguments in order:" << endl
 			<< " - datatype: ft | fb | rt | rb (text file, binary file, raw text or raw binary)" << endl
 			<< " - minimum time needed for decryption (in seconds)" << endl
 			<< " - time for the capsule creation roughly (in seconds; the more, the better; at least 1 minute)" << endl

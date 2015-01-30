@@ -6,70 +6,37 @@
 #include <integer.h>
 #include <secblock.h>
 
+#include "../../TimeCapsuleFactory/TimeCapsuleFactory/Capsule.h"
+#include "../../TimeCapsuleFactory/TimeCapsuleFactory/Encryptor.h"
+#include "../../TimeCapsuleFactory/TimeCapsuleFactory/Puzzle.h"
+
 using CryptoPP::Integer;
-using namespace std::chrono;
+using namespace std;
 
 int main(int argc, char* argv[])
 {
-	hours till(24*365*200);
-	nanoseconds acc(0);
-
-	std::cout << duration_cast<nanoseconds>(till).count() << std::endl << std::endl;
-
-	for (int i = 0; acc < till; ++i)
+	if (argc > 2)
 	{
-		acc = duration_cast<nanoseconds>(acc + nanoseconds(99999999999999999));
-		std::cout << acc.count() << std::endl;
+		Capsule<char> capsule;
+		capsule.load(argv[1]);
+
+		Puzzle puzzle(capsule.getBase());
+		auto key = puzzle.solve(capsule.getCryptedKey(), capsule.getNumberOfOperations(), capsule.getN());
+
+		Encryptor<char> enc;
+		auto detidata = enc.decrypt(capsule.getCryptedData(), key, capsule.getIV());
+
+		ofstream fout(argv[2], ios::trunc);
+		for (auto c : detidata)
+			fout << c;
 	}
-	std::cout << acc.count();
-	
-	/*std::srand(std::time(0));
-
-	unsigned long long a = 3;
-	unsigned long long b = 3;
-	unsigned long long c = 0;
-
-	CryptoPP::word words[100] = {0};
-	words[0] = 2;
-
-	CryptoPP::IntegerSecBlock isb(100);
-	isb.resize(100);
-	isb.Assign(words, 100);
-	Integer i1 = 9999999999999999999;
-	i1 = i1 * i1 * i1 * i1;
-	Integer i2 = 2;
-	Integer dummy;
-
-	auto start1 = std::chrono::high_resolution_clock::now();
-	for (int i = 0; i < 2300; ++i)
+	else
 	{
-		dummy = i1 * i1;
+		cerr << "The following arguments are mandatory:" << endl
+			<< " - path to the capsule file" << endl
+			<< " - path to the file that would contain the data after decryption" << endl;
+		return 1;
 	}
-	auto end1 = std::chrono::high_resolution_clock::now();
-
-	std::cout << (end1 - start1).count() << std::endl;
-
-	//auto start2 = std::chrono::high_resolution_clock::now();
-	for (int i = 0; i < 21; ++i)
-	{
-		auto start2 = std::chrono::high_resolution_clock::now();
-		i2 *= i2;
-		auto end2 = std::chrono::high_resolution_clock::now();
-
-		auto insec = std::chrono::duration_cast<std::chrono::milliseconds>(end2 - start2);
-
-		std::cout << i << ": " << insec.count() << std::endl;
-	}*/
-	//auto end2 = std::chrono::high_resolution_clock::now();
-	
-	//std::cout << "a: " << a << std::endl;
-
-	/*auto start2 = std::chrono::high_resolution_clock::now();
-	for (int i = 0; i < 25; ++i)
-		dummy = i2 * i2;
-	auto end2 = std::chrono::high_resolution_clock::now();*/
-
-	//std::cout << (end1 - start1).count() << std::endl; << (end2 - start2).count() << std::endl;
 
 	return 0;
 }

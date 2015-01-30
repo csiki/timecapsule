@@ -80,7 +80,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\TimeCapsuleFactory\TimeCapsuleFactory\Capsule.cpp" />
+    <ClCompile Include="..\..\TimeCapsuleFactory\TimeCapsuleFactory\Encryptor.cpp" />
+    <ClCompile Include="..\..\TimeCapsuleFactory\TimeCapsuleFactory\Logger.cpp" />
+    <ClCompile Include="..\..\TimeCapsuleFactory\TimeCapsuleFactory\Puzzle.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\TimeCapsuleFactory\TimeCapsuleFactory\Capsule.h" />
+    <ClInclude Include="..\..\TimeCapsuleFactory\TimeCapsuleFactory\Encryptor.h" />
+    <ClInclude Include="..\..\TimeCapsuleFactory\TimeCapsuleFactory\Logger.h" />
+    <ClInclude Include="..\..\TimeCapsuleFactory\TimeCapsuleFactory\Puzzle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -24,10 +24,10 @@ void Logger::save(string filename)
 	auto now = std::chrono::system_clock::now();
 	auto in_time_t = std::chrono::system_clock::to_time_t(now);
 
-	outfile << "============================================" << std::endl
-		<< "TimeCapsuleFactory LOG | "
+	outfile << "=====================================" << std::endl
+		<< "TimeCapsule LOG | "
 		<< std::put_time(std::localtime(&in_time_t), "%Y-%m-%d %X")
-		<< std::endl << "============================================"
+		<< std::endl << "====================================="
 		<< std::endl;
 	
 	for (auto& line : logs)
@@ -39,10 +39,10 @@ void Logger::print(ostream& out)
 	auto now = std::chrono::system_clock::now();
 	auto in_time_t = std::chrono::system_clock::to_time_t(now);
 
-	out << "============================================" << std::endl
-		<< "TimeCapsuleFactory LOG | "
+	out << "=====================================" << std::endl
+		<< "TimeCapsule LOG | "
 		<< std::put_time(std::localtime(&in_time_t), "%Y-%m-%d %X")
-		<< std::endl << "============================================"
+		<< std::endl << "====================================="
 		<< std::endl;
 	
 	for (auto& line : logs)

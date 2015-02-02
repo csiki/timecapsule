@@ -16,7 +16,9 @@ using namespace std;
 // TODO Integer return ComplexityFunctionnek ?
 // TODO change all in the form #include "cryptopp/[XY].h" and make a readme for installing crypto++; should be able to include in the TimeCapsule module the same way
 // TODO multithreading?
-// TODO csak külön menüpont/argumentum legyen alra hogy dekódol vagy factory-t használ
+// TODO csak kulon menupont/argumentum legyen alra hogy dekodol vagy factory-t hasznal
+// FIXME TODO dur=600sec kodolasnal 1119sec hiba
+// TODO kulon threaden idokzonkent mentsuk a decryption allapotat
 
 template <typename T>
 vector<T> readFileToVector(string filepath)
@@ -66,22 +68,6 @@ vector<T> readRawToVector(int argc, char* argv[], int from)
 /// rest... - data to encrypt (path of file with name if datatype==f_ or data itself if datatype=r_)
 int main(int argc, char* argv[])
 {
-
-	/*if (argc > 1)
-	{
-		Capsule<char> capsule;
-		capsule.load(argv[1]);
-
-		Puzzle puzzle(capsule.getBase());
-		auto key = puzzle.solve(capsule.getCryptedKey(), capsule.getNumberOfOperations(), capsule.getN());
-
-		Encryptor<char> enc;
-		auto detidata = enc.decrypt(capsule.getCryptedData(), key, capsule.getIV());
-
-		cout << "Uzenet a multbol, amit a jovobe kuldtek: ";
-		cout << detidata.data() << endl;
-	}*/
-
 	Logger::printPromptlyToStdOut();
 
 	if (argc < 8)
@@ -190,10 +176,9 @@ int main(int argc, char* argv[])
 		return 2;
 	}
 
-	Logger::print(cout);
+	ofstream fout("log.txt", ios::app);
+	Logger::print(fout);
 
-
-	
 	return 0;
 }
 

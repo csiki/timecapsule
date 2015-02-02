@@ -9,9 +9,11 @@
 #include "../../TimeCapsuleFactory/TimeCapsuleFactory/Capsule.h"
 #include "../../TimeCapsuleFactory/TimeCapsuleFactory/Encryptor.h"
 #include "../../TimeCapsuleFactory/TimeCapsuleFactory/Puzzle.h"
+#include "../../TimeCapsuleFactory/TimeCapsuleFactory/Logger.h"
 
 using CryptoPP::Integer;
 using namespace std;
+using namespace std::chrono;
 
 int main(int argc, char* argv[])
 {
@@ -21,14 +23,22 @@ int main(int argc, char* argv[])
 		capsule.load(argv[1]);
 
 		Puzzle puzzle(capsule.getBase());
+		auto start = std::chrono::high_resolution_clock::now();
 		auto key = puzzle.solve(capsule.getCryptedKey(), capsule.getNumberOfOperations(), capsule.getN());
+		auto end = std::chrono::high_resolution_clock::now();
+
+		Logger::log("Puzzle solved in: " + to_string(duration_cast<seconds>(end - start).count()) + " seconds.");
 
 		Encryptor<char> enc;
 		auto detidata = enc.decrypt(capsule.getCryptedData(), key, capsule.getIV());
 
+		Logger::log("Decoded data is saved to: " + string(argv[2]) + ".");
+
 		ofstream fout(argv[2], ios::trunc);
 		for (auto c : detidata)
 			fout << c;
+
+		Logger::print(cout);
 	}
 	else
 	{

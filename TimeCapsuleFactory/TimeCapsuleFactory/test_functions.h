@@ -12,7 +12,9 @@ using CryptoPP::CFB_Mode;
 using CryptoPP::Integer;
 using namespace std;
 
-void testFactory();
+void testFactory(vector<char> datastr, seconds duration, seconds maxStepTimeToTest, int id = 0);
 void testSpeedTester();
 void testEncryptor();
 void testPuzzle();
+
+vector<char> genRandomString(size_t len);

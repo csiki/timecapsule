@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+#include <random>
 #include <type_traits>
 #include "TimeCapsuleFactory.h"
 #include "Capsule.h"
@@ -19,6 +20,7 @@ using namespace std;
 // TODO csak kulon menupont/argumentum legyen alra hogy dekodol vagy factory-t hasznal
 // FIXME TODO dur=600sec kodolasnal 1119sec hiba
 // TODO kulon threaden idokzonkent mentsuk a decryption allapotat
+// TODO timeforcreation should be divided or logged to be converted to maxStepTimeToTest
 
 template <typename T>
 vector<T> readFileToVector(string filepath)
@@ -68,7 +70,25 @@ vector<T> readRawToVector(int argc, char* argv[], int from)
 /// rest... - data to encrypt (path of file with name if datatype==f_ or data itself if datatype=r_)
 int main(int argc, char* argv[])
 {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<unsigned long> distr(5, 20);
+
+	ofstream logfile("log.txt", ios::app);
+
 	Logger::printPromptlyToStdOut();
+	for (int i = 50; i < 100; ++i)
+	{
+		Logger::log("Test with ID #" + to_string(i) + " is started.");
+
+		testFactory(genRandomString(i), seconds(distr(gen)), seconds(distr(gen)), i);
+
+		Logger::print(logfile);
+		Logger::clear();
+		cout << endl;
+	}
+	
+	/*Logger::printPromptlyToStdOut();
 
 	if (argc < 8)
 	{
@@ -99,10 +119,7 @@ int main(int argc, char* argv[])
 	}
 	// determination of sampleThreshold: least nanoseconds that the hardware is able to measure * 2 + 1
 	Puzzle puzzle;
-	auto sample = puzzle.funcdur(1, seconds(60), nanoseconds(1)); // 60 seconds parameter could be anything that is >0
-	nanoseconds sampleThreshold = sample[0].second * 2 + nanoseconds(1);
-	HardwareSpeedTester hst(100000, seconds(timeForCreation), sampleThreshold);
-	Logger::log("Computed sample threshold: " + std::to_string(sampleThreshold.count()) + " ns");
+	HardwareSpeedTester hst(100000, seconds(timeForCreation));
 
 	/// datatype dependent stuff
 	char datatype = argv[1][1];
@@ -177,7 +194,7 @@ int main(int argc, char* argv[])
 	}
 
 	ofstream fout("log.txt", ios::app);
-	Logger::print(fout);
+	Logger::print(fout);*/
 
 	return 0;
 }

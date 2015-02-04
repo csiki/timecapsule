@@ -1,19 +1,38 @@
 #include "test_functions.h"
+#include <random>
 
-void testFactory()
+void testFactory(vector<char> data, seconds duration, seconds maxStepTimeToTest, int id)
 {
 	Puzzle p;
-	HardwareSpeedTester hst(1000, seconds(20), seconds(10));
+	HardwareSpeedTester hst(1000, maxStepTimeToTest);
 	TimeCapsuleFactory<char> tcf(hst);
-	char rawdata[] = "Hey, I hope it will finish in time.. tho probably not :D ...";
-	vector<char> data(rawdata, rawdata + sizeof(rawdata));
-	auto duration = seconds(5);
+	//char rawdata[] = "Hey, I hope it will finish in time.. tho probably not :D ...";
 	auto capsule = tcf.createTimeCapsule(p, data, duration);
-
-	capsule.save("capsule.dat");
+	capsule.save("capsule_" + to_string(id) + ".dat");
 
 	Capsule<char> capsule2;
-	capsule2.load("capsule.dat");
+	capsule2.load("capsule_" + to_string(id) + ".dat");
+
+	auto crdata = capsule.getCryptedData();
+	auto crdata2 = capsule2.getCryptedData();
+
+	assert(capsule.getBase() == capsule2.getBase());
+	assert(capsule.getN() == capsule2.getN());
+	assert(capsule.getIV() == capsule2.getIV());
+	assert(capsule.getCryptedKey() == capsule2.getCryptedKey());
+	assert(capsule.getNumberOfOperations() == capsule2.getNumberOfOperations());
+	Logger::log("Original crypted data size: " + to_string(crdata.size()));
+	Logger::log("Copypasted crypted data size: " + to_string(crdata2.size()));
+
+	string datastr(crdata.begin(), crdata.end());
+	string datastr2(crdata2.begin(), crdata2.end());
+	Logger::log("Original   crypted data: " + datastr);
+	Logger::log("Copypasted crypted data: " + datastr2);
+
+	//cout << capsule.getCryptedData().size() << ", " << capsule2.getCryptedData().size() << endl;
+	//assert(capsule.getCryptedData().size() == capsule2.getCryptedData().size());
+	//for (size_t i = 0; i < capsule.getCryptedData().size(); ++i)
+	//	assert(capsule.getCryptedData()[i] == capsule2.getCryptedData()[i]);
 
 	Puzzle p2(capsule2.getBase());
 
@@ -21,14 +40,15 @@ void testFactory()
 	auto key = p2.solve(capsule2.getCryptedKey(), capsule2.getNumberOfOperations(), capsule2.getN());
 	auto end = chrono::high_resolution_clock::now();
 
-	cout << "Time specified to decode: " << duration.count() << " seconds" << endl;
-	cout << "Time taken to decode: " << chrono::duration_cast<seconds>(end - start).count() << " seconds" << endl;
+	Logger::log("Time specified to decode: " + to_string(duration.count()) + " seconds");
+	Logger::log("Time taken to decode: " + to_string(chrono::duration_cast<seconds>(end - start).count()) + " seconds");
 	
 	Encryptor<char> cr;
 	auto databack = cr.decrypt(capsule2.getCryptedData(), key, capsule2.getIV());
-	cout << "Data decrypted: " << databack.data() << endl;
-
-	Logger::print(std::cout);
+	string tmpdata(data.begin(), data.end());
+	string tmpdataback(databack.begin(), databack.end());
+	Logger::log("Original  data: " + tmpdata);
+	Logger::log("Data decrypted: " + tmpdataback);
 }
 
 void testSpeedTester()
@@ -92,4 +112,23 @@ void testEncryptor()
 
 	cout << cdata.data() << endl;
 	cout << databack.data() << endl;
+}
+
+static const char alphanum[] =
+"0123456789"
+"!@#$%^&*"
+"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+"abcdefghijklmnopqrstuvwxyz";
+
+static const size_t alphanumlen = sizeof(alphanum);
+
+vector<char> genRandomString(size_t len)
+{
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<unsigned long> distr(0, alphanumlen - 1);
+	vector<char> strvec;
+	for (size_t i = 0; i < len; ++i)
+		strvec.push_back(alphanum[distr(gen)]);
+	return strvec;
 }

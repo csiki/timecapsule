@@ -74,11 +74,7 @@ public:
 
 		// data
 		T c;
-		while (!fin.eof())
-		{
-			fin >> c;
-			cdata.push_back(c);
-		}
+		while (fin >> c) cdata.push_back(c); // FIXME TODO irreliable, see capsule #57, #58
 
 		return true;
 	}

@@ -31,6 +31,7 @@ public:
 	static void log(string line);
 	static void save(string filename);
 	static void print(ostream& out);
+	static void clear() { logs.clear(); }
 	static void printPromptlyToStdOut() { promptPrint = true; }
 };
 

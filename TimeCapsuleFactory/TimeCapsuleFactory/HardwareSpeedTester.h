@@ -33,7 +33,7 @@ private:
 	ComplexityFunc fitComplexity(const DurationSamples& samples, const ComplexityFunc& complexity, long double& stdev);
 
 public:
-	HardwareSpeedTester(size_t maxStepToTest_ = 1000, nanoseconds maxStepTimeToTest_ = seconds(60), nanoseconds sampleThreshold_ = nanoseconds(1));
+	HardwareSpeedTester(size_t maxStepToTest_ = 1000, nanoseconds maxStepTimeToTest_ = seconds(60), nanoseconds sampleThreshold_ = nanoseconds(0));
 	ComplexityFunc testPuzzleComplexity(Puzzle& puzzle, long double& stdev, DurationSamples samples = DurationSamples());
 	unsigned long long estimateStepsNeeded(const ComplexityFunc& complexity, seconds duration, seconds& err);
 	static long double calcMSE(const DurationSamples& samples, const ComplexityFunc& fit);

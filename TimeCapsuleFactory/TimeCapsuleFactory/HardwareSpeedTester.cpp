@@ -11,6 +11,13 @@ HardwareSpeedTester::HardwareSpeedTester(size_t maxStepToTest_, nanoseconds maxS
 
 ComplexityFunc HardwareSpeedTester::testPuzzleComplexity(Puzzle& puzzle, long double& stdev, DurationSamples samples)
 {
+	// determine sample threshold if not given previously
+	if (sampleThreshold.count() == 0)
+	{
+		auto sample = puzzle.funcdur(1, seconds(60), nanoseconds(1)); // 60 seconds parameter could be anything that is >0
+		sampleThreshold = sample[0].second * 2 + nanoseconds(1);
+	}
+
 	// sample calculation times
 	if (samples.empty())
 		samples = puzzle.funcdur(maxStepToTest, maxStepTimeToTest, sampleThreshold);

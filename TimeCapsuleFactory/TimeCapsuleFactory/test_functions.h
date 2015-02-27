@@ -1,5 +1,6 @@
 #include <iostream>
 #include <aes.h>
+#include <random>
 #include "TimeCapsuleFactory.h"
 #include "Puzzle.h"
 #include "Logger.h"
@@ -12,7 +13,8 @@ using CryptoPP::CFB_Mode;
 using CryptoPP::Integer;
 using namespace std;
 
-void testFactory(vector<char> datastr, seconds duration, seconds maxStepTimeToTest, int id = 0);
+void multipleFactoryTest();
+void testFactory(vector<char> datastr, seconds duration, seconds maxTimeToTest, int id = 0);
 void testSpeedTester();
 void testEncryptor();
 void testPuzzle();

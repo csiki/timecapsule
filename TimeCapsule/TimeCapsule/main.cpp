@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
 		Encryptor<char> enc;
 		auto detidata = enc.decrypt(capsule.getCryptedData(), key, capsule.getIV());
 
-		Logger::log("Decoded data is saved to: " + string(argv[2]) + ".");
+		Logger::log("Decoded data is saved to: " + string(argv[2]));
 
 		ofstream fout(argv[2], ios::trunc);
 		for (auto c : detidata)

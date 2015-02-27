@@ -57,6 +57,11 @@ public:
 		for (auto& c : cdata)
 			fout << c;
 
+		/*fout.close();
+		fout.open(filepath, ios::binary | ios::app);
+		for (auto& c : cdata)
+			fout << static_cast<unsigned char>(c);*/
+
 		return true;
 	}
 
@@ -74,7 +79,22 @@ public:
 
 		// data
 		T c;
-		while (fin >> c) cdata.push_back(c); // FIXME TODO irreliable, see capsule #57, #58
+		fin.get(c); // first linebreak
+		while (fin.get(c))
+			cdata.push_back(c);
+
+		/*auto datapos = fin.tellg();
+		// read as binary
+		fin.close();
+		fin.open(filepath, ios::binary);
+		fin.seekg(datapos);
+
+		unsigned char unc;
+		while (fin.get(unc))
+		{
+			auto ctmp = static_cast<T*>(&unc);
+			cdata.push_back(*ctmp);
+		}*/
 
 		return true;
 	}

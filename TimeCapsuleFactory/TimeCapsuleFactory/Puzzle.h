@@ -45,7 +45,7 @@ public:
 	vector<ComplexityFunc> getPossibleComplexities() { return possibleComplexities; }
 	unsigned long getBase() { return base; }
 
-	virtual DurationSamples funcdur(size_t maxStepToTest, nanoseconds maxStepTimeToTest, nanoseconds sampleThreshold);
+	virtual DurationSamples funcdur(size_t maxStepToTest, nanoseconds maxTimeToTest, nanoseconds sampleThreshold);
 	virtual Integer setup(const SecByteBlock& key, unsigned long long times, Integer& n);
 	virtual SecByteBlock solve(const Integer& ckey, unsigned long long times, const Integer& n);
 };

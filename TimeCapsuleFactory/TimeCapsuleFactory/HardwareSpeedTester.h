@@ -28,13 +28,13 @@ class HardwareSpeedTester
 {
 private:
 	size_t maxStepToTest;
-	nanoseconds maxStepTimeToTest;
+	nanoseconds maxTimeToTest;
 	nanoseconds sampleThreshold;
-	ComplexityFunc fitComplexity(const DurationSamples& samples, const ComplexityFunc& complexity, long double& stdev);
+	ComplexityFunc fitComplexity(const DurationSamples& samples, const ComplexityFunc& complexity);
 
 public:
-	HardwareSpeedTester(size_t maxStepToTest_ = 1000, nanoseconds maxStepTimeToTest_ = seconds(60), nanoseconds sampleThreshold_ = nanoseconds(0));
-	ComplexityFunc testPuzzleComplexity(Puzzle& puzzle, long double& stdev, DurationSamples samples = DurationSamples());
+	HardwareSpeedTester(size_t maxStepToTest_ = 100, nanoseconds maxTimeToTest_ = seconds(60), nanoseconds sampleThreshold_ = nanoseconds(0));
+	ComplexityFunc testPuzzleComplexity(Puzzle& puzzle, long double& mse, DurationSamples samples = DurationSamples());
 	unsigned long long estimateStepsNeeded(const ComplexityFunc& complexity, seconds duration, seconds& err);
 	static long double calcMSE(const DurationSamples& samples, const ComplexityFunc& fit);
 	static bool cramerEquationSolver(long double a11, long double a12, long double a21, long double a22, long double y1, long double y2, long double& x1, long double& x2);

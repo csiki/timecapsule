@@ -1,10 +1,33 @@
 #include "test_functions.h"
-#include <random>
 
-void testFactory(vector<char> data, seconds duration, seconds maxStepTimeToTest, int id)
+void multipleFactoryTest()
+{
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<unsigned long> distr(5, 20);
+
+	ofstream logfile("log.txt", ios::app);
+
+	Logger::printPromptlyToStdOut();
+	for (int i = 50; i < 55; ++i)
+	{
+		Logger::log("Test with ID #" + to_string(i) + " is started.");
+
+		//testFactory(genRandomString(i), seconds(distr(gen)), seconds(distr(gen)), i);
+		testFactory(genRandomString(i), seconds(distr(gen)), seconds(distr(gen)), i);
+
+		Logger::print(logfile);
+		Logger::clear();
+		cout << endl;
+	}
+
+	Logger::save("log.txt");
+}
+
+void testFactory(vector<char> data, seconds duration, seconds maxTimeToTest, int id)
 {
 	Puzzle p;
-	HardwareSpeedTester hst(1000, maxStepTimeToTest);
+	HardwareSpeedTester hst(100, maxTimeToTest);
 	TimeCapsuleFactory<char> tcf(hst);
 	//char rawdata[] = "Hey, I hope it will finish in time.. tho probably not :D ...";
 	auto capsule = tcf.createTimeCapsule(p, data, duration);
@@ -49,6 +72,13 @@ void testFactory(vector<char> data, seconds duration, seconds maxStepTimeToTest,
 	string tmpdataback(databack.begin(), databack.end());
 	Logger::log("Original  data: " + tmpdata);
 	Logger::log("Data decrypted: " + tmpdataback);
+
+	/*char dummychar;
+	if (crdata.size() != crdata2.size())
+	{
+		Logger::log("PARA VAN!");
+		cin >> dummychar;
+	}*/
 }
 
 void testSpeedTester()

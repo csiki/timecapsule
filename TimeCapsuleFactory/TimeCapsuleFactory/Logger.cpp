@@ -15,7 +15,10 @@ void Logger::log(string line)
 		logs.push_back(line);
 	
 	if (promptPrint)
+	{
 		std::cout << "| " << line << std::endl;
+		std::flush(std::cout);
+	}
 }
 
 void Logger::save(string filename)

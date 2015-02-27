@@ -1,8 +1,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <algorithm>
-#include <random>
 #include <type_traits>
 #include "TimeCapsuleFactory.h"
 #include "Capsule.h"
@@ -13,14 +11,12 @@ using namespace std;
 // TODO log more frequently
 // TODO update StarUML when ready
 // TODO test binary files
-// TODO implement TimeCapsule module
-// TODO Integer return ComplexityFunctionnek ?
 // TODO change all in the form #include "cryptopp/[XY].h" and make a readme for installing crypto++; should be able to include in the TimeCapsule module the same way
-// TODO multithreading?
-// TODO csak kulon menupont/argumentum legyen alra hogy dekodol vagy factory-t hasznal
-// FIXME TODO dur=600sec kodolasnal 1119sec hiba
+// TODO dur=600sec kodolasnal 1119sec hiba
 // TODO kulon threaden idokzonkent mentsuk a decryption allapotat
-// TODO timeforcreation should be divided or logged to be converted to maxStepTimeToTest
+// TODO puzzle.cpp::funcdur save samples and looat matlab + the fitting curve --> compare
+
+// TODO FIXME TODO FIXME SORTÖRÉS BEKERÜL A COPYPASTED ELEJÉRE (VAGY ÍGY IRÓDIK KI, VAGY ÍGY ÍRJA KI)
 
 template <typename T>
 vector<T> readFileToVector(string filepath)
@@ -70,25 +66,22 @@ vector<T> readRawToVector(int argc, char* argv[], int from)
 /// rest... - data to encrypt (path of file with name if datatype==f_ or data itself if datatype=r_)
 int main(int argc, char* argv[])
 {
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_int_distribution<unsigned long> distr(5, 20);
+	/*ifstream fin("eofchar.txt", ios::binary);
+	char c;
+	int c2;
+	int i = -1;
+	while (i++ < 10)
+	{
+		c2 = fin.get();
+		cout << c2 << ", "; // binaryval olvastasd be
+		//fin.seekg(1, ios::cur);
+		//if (c2 == -1) {fin.seekg(1, ios::cur); cout << "dawawd";}
+	}
+	c2 = fin.get(); cout << c2;
+	cout << endl; // TODO a nyil -1 (fuck)*/
 
-	ofstream logfile("log.txt", ios::app);
 
 	Logger::printPromptlyToStdOut();
-	for (int i = 50; i < 100; ++i)
-	{
-		Logger::log("Test with ID #" + to_string(i) + " is started.");
-
-		testFactory(genRandomString(i), seconds(distr(gen)), seconds(distr(gen)), i);
-
-		Logger::print(logfile);
-		Logger::clear();
-		cout << endl;
-	}
-	
-	/*Logger::printPromptlyToStdOut();
 
 	if (argc < 8)
 	{
@@ -194,7 +187,7 @@ int main(int argc, char* argv[])
 	}
 
 	ofstream fout("log.txt", ios::app);
-	Logger::print(fout);*/
+	Logger::print(fout);
 
 	return 0;
 }

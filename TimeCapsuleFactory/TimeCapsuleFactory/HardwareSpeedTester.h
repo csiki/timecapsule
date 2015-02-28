@@ -16,6 +16,7 @@
 #include <numeric>
 #include <exception>
 #include "Puzzle.h"
+#include "Logger.h"
 
 using std::chrono::nanoseconds;
 using std::chrono::seconds;
@@ -33,7 +34,7 @@ private:
 	ComplexityFunc fitComplexity(const DurationSamples& samples, const ComplexityFunc& complexity);
 
 public:
-	HardwareSpeedTester(size_t maxStepToTest_ = 100, nanoseconds maxTimeToTest_ = seconds(60), nanoseconds sampleThreshold_ = nanoseconds(0));
+	HardwareSpeedTester(size_t maxStepToTest_ = 1000, nanoseconds maxTimeToTest_ = seconds(60), nanoseconds sampleThreshold_ = nanoseconds(0));
 	ComplexityFunc testPuzzleComplexity(Puzzle& puzzle, long double& mse, DurationSamples samples = DurationSamples());
 	unsigned long long estimateStepsNeeded(const ComplexityFunc& complexity, seconds duration, seconds& err);
 	static long double calcMSE(const DurationSamples& samples, const ComplexityFunc& fit);

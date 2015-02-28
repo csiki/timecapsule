@@ -6,6 +6,8 @@
 #include "Capsule.h"
 #include "test_functions.h"
 
+#include <stdio.h>
+
 using namespace std;
 
 // TODO log more frequently
@@ -15,8 +17,6 @@ using namespace std;
 // TODO dur=600sec kodolasnal 1119sec hiba
 // TODO kulon threaden idokzonkent mentsuk a decryption allapotat
 // TODO puzzle.cpp::funcdur save samples and looat matlab + the fitting curve --> compare
-
-// TODO FIXME TODO FIXME SORTÖRÉS BEKERÜL A COPYPASTED ELEJÉRE (VAGY ÍGY IRÓDIK KI, VAGY ÍGY ÍRJA KI)
 
 template <typename T>
 vector<T> readFileToVector(string filepath)
@@ -66,21 +66,6 @@ vector<T> readRawToVector(int argc, char* argv[], int from)
 /// rest... - data to encrypt (path of file with name if datatype==f_ or data itself if datatype=r_)
 int main(int argc, char* argv[])
 {
-	/*ifstream fin("eofchar.txt", ios::binary);
-	char c;
-	int c2;
-	int i = -1;
-	while (i++ < 10)
-	{
-		c2 = fin.get();
-		cout << c2 << ", "; // binaryval olvastasd be
-		//fin.seekg(1, ios::cur);
-		//if (c2 == -1) {fin.seekg(1, ios::cur); cout << "dawawd";}
-	}
-	c2 = fin.get(); cout << c2;
-	cout << endl; // TODO a nyil -1 (fuck)*/
-
-
 	Logger::printPromptlyToStdOut();
 
 	if (argc < 8)

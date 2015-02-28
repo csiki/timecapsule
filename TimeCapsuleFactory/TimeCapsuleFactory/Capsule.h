@@ -33,6 +33,9 @@ private:
 	unsigned long long times;
 	unsigned long base;
 
+	static string errCharSubstitue;
+	static T erroneousByte;
+
 public:
 	Capsule() : times(0), base(0) {}
 
@@ -55,12 +58,13 @@ public:
 
 		// data
 		for (auto& c : cdata)
-			fout << c;
-
-		/*fout.close();
-		fout.open(filepath, ios::binary | ios::app);
-		for (auto& c : cdata)
-			fout << static_cast<unsigned char>(c);*/
+		{
+			if (std::is_same<T, char>::value
+				&& c == erroneousByte)
+				fout << errCharSubstitue; // special string instead of EOF
+			else
+				fout << c;
+		}
 
 		return true;
 	}
@@ -81,20 +85,11 @@ public:
 		T c;
 		fin.get(c); // first linebreak
 		while (fin.get(c))
-			cdata.push_back(c);
-
-		/*auto datapos = fin.tellg();
-		// read as binary
-		fin.close();
-		fin.open(filepath, ios::binary);
-		fin.seekg(datapos);
-
-		unsigned char unc;
-		while (fin.get(unc))
 		{
-			auto ctmp = static_cast<T*>(&unc);
-			cdata.push_back(*ctmp);
-		}*/
+			if (std::is_same<T, char>::value && c == errCharSubstitue[0])
+				c = handleEOFread(fin);
+			cdata.push_back(c);
+		}
 
 		return true;
 	}
@@ -127,6 +122,23 @@ public:
 	unsigned long getBase()
 	{
 		return base;
+	}
+
+	static T handleEOFread(std::ifstream& fin)
+	{
+		char c;
+		auto refpos = fin.tellg();
+		for (size_t i = 1; i < errCharSubstitue.length(); ++i)
+		{
+			fin.get(c);
+			if (c != errCharSubstitue[i]) // not the eof string afterall
+			{
+				fin.seekg(refpos);
+				return errCharSubstitue[0];
+			}
+		}
+
+		return erroneousByte;
 	}
 };
 

@@ -17,12 +17,13 @@ ComplexityFunc HardwareSpeedTester::testPuzzleComplexity(Puzzle& puzzle, long do
 	if (sampleThreshold.count() == 0)
 	{
 		auto sample = puzzle.funcdur(1, seconds(60), nanoseconds(1)); // 60 seconds parameter could be anything that is >0
-		sampleThreshold = nanoseconds(1);//sample[0].second;
+		sampleThreshold = sample[0].second;//nanoseconds(1);
 	}
 
 	// sample calculation times
 	if (samples.empty())
 		samples = puzzle.funcdur(maxStepToTest, maxTimeToTest, sampleThreshold);
+	Logger::log("Number of samples acquired: " + std::to_string(samples.size()));
 
 	// test & fit all complexity functions on the samples
 	long double bestmse = std::numeric_limits<long double>::max();
@@ -32,6 +33,7 @@ ComplexityFunc HardwareSpeedTester::testPuzzleComplexity(Puzzle& puzzle, long do
 	{
 		auto tmpfit = fitComplexity(samples, cf);
 		auto tmpmse = calcMSE(samples, tmpfit);
+
 		if (tmpmse < bestmse)
 		{
 			bestmse = tmpmse;

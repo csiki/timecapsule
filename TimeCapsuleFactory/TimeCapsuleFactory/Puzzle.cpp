@@ -29,10 +29,10 @@ void Puzzle::initComplexities()
 	ComplexityFunc flin = [] (unsigned long long n) {
 		return n;
 	};
-	ComplexityFunc flog = [] (unsigned long long n) {
+	/*ComplexityFunc flog = [] (unsigned long long n) {
 		return std::log(n) + .5;
 	};
-	/*ComplexityFunc fexp = [] (unsigned long long n) {
+	ComplexityFunc fexp = [] (unsigned long long n) {
 		return std::exp(n) + .5;
 	};
 	ComplexityFunc f2exp = [] (unsigned long long n) {
@@ -45,7 +45,7 @@ void Puzzle::initComplexities()
 		return n * n * std::exp(n) + .5;
 	};*/
 	possibleComplexities.push_back(flin);
-	possibleComplexities.push_back(flog);
+	//possibleComplexities.push_back(flog);
 	//possibleComplexities.push_back(fexp);
 	//possibleComplexities.push_back(f2exp);
 	//possibleComplexities.push_back(fnexp);

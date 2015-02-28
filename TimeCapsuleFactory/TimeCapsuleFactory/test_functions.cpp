@@ -1,6 +1,6 @@
 #include "test_functions.h"
 
-void multipleFactoryTest()
+void multipleFactoryTest(size_t times)
 {
 	std::random_device rd;
 	std::mt19937 gen(rd());
@@ -9,11 +9,10 @@ void multipleFactoryTest()
 	ofstream logfile("log.txt", ios::app);
 
 	Logger::printPromptlyToStdOut();
-	for (int i = 50; i < 55; ++i)
+	for (size_t i = 50; i < 50 + times; ++i)
 	{
 		Logger::log("Test with ID #" + to_string(i) + " is started.");
 
-		//testFactory(genRandomString(i), seconds(distr(gen)), seconds(distr(gen)), i);
 		testFactory(genRandomString(i), seconds(distr(gen)), seconds(distr(gen)), i);
 
 		Logger::print(logfile);
@@ -27,7 +26,7 @@ void multipleFactoryTest()
 void testFactory(vector<char> data, seconds duration, seconds maxTimeToTest, int id)
 {
 	Puzzle p;
-	HardwareSpeedTester hst(100, maxTimeToTest);
+	HardwareSpeedTester hst(1000, maxTimeToTest);
 	TimeCapsuleFactory<char> tcf(hst);
 	//char rawdata[] = "Hey, I hope it will finish in time.. tho probably not :D ...";
 	auto capsule = tcf.createTimeCapsule(p, data, duration);

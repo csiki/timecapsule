@@ -13,7 +13,7 @@ using CryptoPP::CFB_Mode;
 using CryptoPP::Integer;
 using namespace std;
 
-void multipleFactoryTest();
+void multipleFactoryTest(size_t times = 5);
 void testFactory(vector<char> datastr, seconds duration, seconds maxTimeToTest, int id = 0);
 void testSpeedTester();
 void testEncryptor();

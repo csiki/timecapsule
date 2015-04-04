@@ -72,7 +72,10 @@ public:
 	bool load(string filepath)
 	{
 		Integer intiv;
-		ifstream fin(filepath);
+		int flag = 0;
+		if (!std::is_same<T, char>::value)
+			flag = ios::binary;
+		ifstream fin(filepath, flag);
 
 		fin >> base;
 		fin >> times;
@@ -82,8 +85,10 @@ public:
 		iv = cryptoInt2SBB(intiv);
 
 		// data
-		T c;
-		fin.get(c); // first linebreak
+		char c;
+		fin.ignore(1); // linebreak after IV
+		//cdata.assign(std::istreambuf_iterator<char>(fin),
+		//	(std::istreambuf_iterator<char>()));
 		while (fin.get(c))
 		{
 			if (std::is_same<T, char>::value && c == errCharSubstitue[0])

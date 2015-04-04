@@ -10,14 +10,6 @@
 
 using namespace std;
 
-// TODO log more frequently
-// TODO update StarUML when ready
-// TODO test binary files
-// TODO change all in the form #include "cryptopp/[XY].h" and make a readme for installing crypto++; should be able to include in the TimeCapsule module the same way
-// TODO dur=600sec kodolasnal 1119sec hiba
-// TODO kulon threaden idokzonkent mentsuk a decryption allapotat
-// TODO puzzle.cpp::funcdur save samples and looat matlab + the fitting curve --> compare
-
 template <typename T>
 vector<T> readFileToVector(string filepath)
 {
@@ -41,7 +33,7 @@ vector<T> readFileToVector(string filepath)
 }
 
 template <typename T>
-vector<T> readRawToVector(int argc, char* argv[], int from)
+vector<T> readRawToVector(size_t argc, char* argv[], size_t from)
 {
 	vector<T> buffer;
 	string acc;
@@ -78,7 +70,7 @@ int main(int argc, char* argv[])
 			<< " - number of puzzle steps (if unknown give 0; if given min. time for decryption is disregarded)" << endl
 			<< " - file name and path of the capsule to save (may not contain white-spaces)" << endl
 			<< " - data to encrypt (path of file with name if datatype==f_ or data itself if datatype=r_)" << endl << endl
-			<< "Example command: tcfactory rt 31536000 120 _ 0 path/to/capsule.dat Hey! Please enrypt me for 1 year! It will take about 120*log(120) seconds!" << endl;
+			<< "Example command: tcfactory rt 31536000 120 _ 0 path/to/capsule.dat Hey! Please enrypt me for 1 year! It will take about 120 seconds!" << endl;
 		return 1;
 	}
 

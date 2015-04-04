@@ -6,7 +6,6 @@
 *.user
 *.userosscache
 *.sln.docstates
-*.sln
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -26,11 +25,13 @@ bld/
 # Roslyn cache directories
 *.ide/
 
+# Visual Studo 2015 cache/options directory
+.vs/
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
-#NUNIT
 *.VisualState.xml
 TestResult.xml
 
